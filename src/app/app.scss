@@ -1,0 +1,124 @@
+.details-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;   /* horizontal center */
+  justify-content: center; /* vertical center */
+  text-align: center;
+
+  width: 100%;
+  max-width: 600px;
+  margin: 20px auto; /* center the card itself */
+  padding: 20px;
+
+  .route-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center; /* center content */
+    gap: 20px;
+
+    @media (max-width: 600px) {
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .city {
+      h3 {
+        margin: 0;
+        font-size: 1.5rem;
+      }
+      .label {
+        font-size: 0.9rem;
+        color: gray;
+      }
+    }
+
+    .flight-icon {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .plane {
+        font-size: 36px;
+        color: #1976d2;
+      }
+
+      .dashed-line {
+        width: 2px;
+        height: 40px;
+        border-left: 2px dashed #1976d2;
+        margin: 5px 0;
+      }
+    }
+  }
+
+  .extra-info {
+    margin-top: 16px;
+
+    p {
+      margin: 4px 0;
+      font-size: 1rem;
+    }
+  }
+}
+
+.page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;      /* horizontal center */
+  justify-content: center;  /* vertical center */
+  min-height: 100vh;        /* take full screen height */
+  padding: 16px;
+  box-sizing: border-box;
+  background: #f9f9f9;      /* optional light background */
+}
+
+mat-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;      /* center inside card */
+  justify-content: center;  /* vertical center inside card */
+  text-align: center;
+  width: 100%;
+  max-width: 600px;
+  margin: 12px 0;
+  padding: 20px;
+}
+
+
+.extra-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;  /* two columns on desktop */
+  gap: 12px 20px;                  /* row + column spacing */
+  width: 100%;
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 16px;
+  border-radius: 12px;
+  background: #f9f9f9;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  font-weight: 600;
+  color: #555;
+  font-size: 0.9rem;
+}
+
+.value {
+  font-size: 1.1rem;
+  color: #222;
+}
+
+/* Mobile: stack all items in one column */
+@media (max-width: 600px) {
+  .extra-info {
+    grid-template-columns: 1fr;
+  }
+}

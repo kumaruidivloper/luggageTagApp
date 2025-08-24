@@ -1,0 +1,110 @@
+<div class="page-container">
+  <mat-card  class="details-card">
+  <div style="width: 100%; padding: 10px 0;">
+    <button matButton="tonal" (click)="openDialog()">Edit</button>
+  </div>
+  
+  <div class="route-container">
+    <!-- From -->
+    <div class="city">
+      @if(travelDetails) {
+        <h3>{{travelDetails.from}}</h3>
+      } @else {
+        <h3>Bengaluru</h3>
+      }
+      <span class="label">Departure</span>
+    </div>
+
+    <!-- Flight Icon -->
+    <div class="flight-icon">
+      <mat-icon class="plane">flight_takeoff</mat-icon>
+      <div class="dashed-line"></div>
+      <mat-icon class="plane">flight_land</mat-icon>
+    </div>
+
+    <!-- To -->
+    <div class="city">
+       @if(travelDetails) {
+        <h3>{{travelDetails.to}}</h3>
+      } @else {
+        <h3>Sydney</h3>
+      }
+      <span class="label">Arrival</span>
+    </div>
+  </div>
+  
+  @if(travelDetails.hasLayover) {
+    <div style="border: solid 1px #807c7c; width: 100%; padding: 1px 0; background-color: #807c7c; margin: 10px 0;"></div>
+
+    <div class="route-container">
+      <!-- From -->
+      <div class="city">
+        @if(travelDetails) {
+          <h3>{{travelDetails.layoverFrom}}</h3>
+        } @else {
+          <h3>Bengaluru</h3>
+        }
+        <span class="label">Departure</span>
+      </div>
+
+      <!-- Flight Icon -->
+      <div class="flight-icon">
+        <mat-icon class="plane">flight_takeoff</mat-icon>
+        <div class="dashed-line"></div>
+        <mat-icon class="plane">flight_land</mat-icon>
+      </div>
+
+      <!-- To -->
+      <div class="city">
+        @if(travelDetails) {
+          <h3>{{travelDetails.layoverTo}}</h3>
+        } @else {
+          <h3>Bengaluru</h3>
+        }
+        <span class="label">Arrival</span>
+      </div>
+    </div>
+  }
+  
+  
+
+  
+  
+
+  <!-- Airline & Layover -->
+<div class="extra-info">
+  <div class="info-item">
+    <span class="label">Passenger Name:</span>
+     @if(travelDetails) {
+        <span class="value">{{travelDetails.firstName}} {{travelDetails.lastName}}</span>
+      } @else {
+        <span class="value">Kumaravel Shanmugam</span>
+      }
+  </div>
+  <div class="info-item">
+    <span class="label">Contact Number:</span>
+     @if(travelDetails) {
+        <span class="value">{{travelDetails.contactNumber}}</span>
+      } @else {
+        <span class="value">+91-9945729262</span>
+      }
+  </div>
+  <div class="info-item">
+    <span class="label">Airline:</span>
+     @if(travelDetails) {
+        <span class="value">{{travelDetails.flightService}}</span>
+      } @else {
+        <span class="value">Qantaz</span>
+      }
+  </div>
+  <div class="info-item">
+    <span class="label">Layover:</span>
+    @if(travelDetails) {
+        <span class="value">{{travelDetails.layoverTime}}</span>
+      } @else {
+        <span class="value">12hr</span>
+      }
+  </div>
+</div>
+</mat-card>
+</div>

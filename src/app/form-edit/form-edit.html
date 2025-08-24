@@ -1,0 +1,125 @@
+<h2 mat-dialog-title>Travel Details Form</h2>
+<mat-dialog-content class="mat-typography">
+<div style="padding: 15px 15px 15px 15px; background-color: #f1f3f5;">
+    <form [formGroup]="travelForm" (ngSubmit)="onSubmit()">
+    <div class="form-grid">
+      <!-- First Name -->
+      <mat-form-field appearance="outline">
+        <mat-label>First Name</mat-label>
+        <input matInput formControlName="firstName" />
+        @if(travelForm.get('firstName')?.hasError('required')) {
+            <mat-error>
+            First name is required
+            </mat-error>
+        }
+        
+      </mat-form-field>
+
+      <!-- Last Name -->
+      <mat-form-field appearance="outline">
+        <mat-label>Last Name</mat-label>
+        <input matInput formControlName="lastName" />
+        @if(travelForm.get('lastName')?.hasError('required')) {
+            <mat-error *ngIf="travelForm.get('lastName')?.hasError('required')">
+            Last name is required
+            </mat-error>
+        }
+      </mat-form-field>
+
+      <!-- Flight Service -->
+      <mat-form-field appearance="outline">
+        <mat-label>Flight Service</mat-label>
+        <input matInput formControlName="flightService" />
+        @if(travelForm.get('flightService')?.hasError('required')) {
+            <mat-error>
+            Flight service is required
+            </mat-error>
+        }
+      </mat-form-field>
+
+      <!-- From -->
+      <mat-form-field appearance="outline">
+        <mat-label>From</mat-label>
+        <input matInput formControlName="from" />
+        @if(travelForm.get('from')?.hasError('required')) {
+            <mat-error>
+            Origin is required
+            </mat-error>
+        }
+      </mat-form-field>
+
+      <!-- To -->
+      <mat-form-field appearance="outline">
+        <mat-label>To Destination</mat-label>
+        <input matInput formControlName="to" />
+        @if(travelForm.get('to')?.hasError('required')) {
+            <mat-error>
+            Destination is required
+            </mat-error>
+        }
+      </mat-form-field>
+
+      <!-- Contact Number -->
+      <mat-form-field appearance="outline">
+        <mat-label>Contact Number</mat-label>
+        <input matInput formControlName="contactNumber" maxlength="10" />
+        @if(travelForm.get('contactNumber')?.hasError('required')) {
+            <mat-error>
+                Contact number is required
+            </mat-error>
+        }
+        @if(travelForm.get('contactNumber')?.hasError('pattern')) {
+            <mat-error *ngIf="travelForm.get('contactNumber')?.hasError('pattern')">
+                Enter a valid 10-digit number
+            </mat-error>
+        }
+      </mat-form-field>
+    </div>
+
+    <!-- Layover Checkbox -->
+    <mat-checkbox formControlName="hasLayover">Any Layover?</mat-checkbox>
+
+    <!-- Layover Section -->
+    @if(travelForm.get('hasLayover')?.value) {
+        <div class="form-grid">
+        <mat-form-field appearance="outline">
+            <mat-label>Layover From</mat-label>
+            <input matInput formControlName="layoverFrom" />
+            @if(travelForm.get('layoverFrom')?.hasError('required')) {
+                <mat-error *ngIf="travelForm.get('layoverFrom')?.hasError('required')">
+                    Layover origin is required
+                </mat-error>
+            }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Layover To</mat-label>
+            <input matInput formControlName="layoverTo" />
+            @if(travelForm.get('layoverTo')?.hasError('required')) {
+                <mat-error *ngIf="travelForm.get('layoverTo')?.hasError('required')">
+                    Layover destination is required
+                </mat-error>
+            }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Layover Time (hrs)</mat-label>
+            <input matInput type="text" formControlName="layoverTime" />
+            @if(travelForm.get('layoverTime')?.hasError('required')) {
+                <mat-error>
+                    Layover time is required
+                </mat-error>
+            }
+        </mat-form-field>
+        </div>
+    }
+    
+  </form>
+</div>
+  
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button matButton="tonal">Reset</button>
+  <button matButton="tonal" mat-dialog-close>Cancel</button>
+  <button type="submit" [mat-dialog-close]="true" cdkFocusInitial matButton="filled" [disabled]="!travelForm.valid" (click)="onSubmit()">Submit</button>
+</mat-dialog-actions>
