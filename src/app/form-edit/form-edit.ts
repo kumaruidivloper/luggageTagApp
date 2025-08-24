@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
@@ -27,7 +27,8 @@ travelForm: FormGroup;
       layoverFrom: [''],
       layoverTo: [''],
       layoverTime: [''],
-      contactNumber: ['', [Validators.required, Validators.pattern('^[0-9]{10,15}$')]]
+      contactNumber: ['', [Validators.required, Validators.pattern('^[0-9]{10,15}$')]],
+      luggage: this.fb.array([])
     });
 
     // Dynamically add validation when layover is checked
@@ -47,6 +48,30 @@ travelForm: FormGroup;
       this.travelForm.get('layoverTime')?.updateValueAndValidity();
     });
   }
+
+  // Get the luggage FormArray
+get luggageArray(): FormArray {
+  return this.travelForm.get('luggage') as FormArray;
+}
+
+      // Create a single luggage FormGroup
+ createLuggageGroup(): FormGroup {
+  return this.fb.group({
+    luggageNumber: ['', Validators.required],
+    weight: ['', [Validators.required, Validators.min(1)]],
+    type: ['', Validators.required]
+  });
+}
+
+    // Add new luggage item
+addLuggage(): void {
+  this.luggageArray.push(this.createLuggageGroup());
+}
+
+// Remove luggage item
+removeLuggage(index: number): void {
+  this.luggageArray.removeAt(index);
+}
 
   onSubmit() {
     if (this.travelForm.valid) {

@@ -113,6 +113,65 @@
         </mat-form-field>
         </div>
     }
+
+   <div formArrayName="luggage">
+  <h3>Luggage Details</h3>
+  
+  <div *ngFor="let luggage of luggageArray.controls; let i = index" [formGroupName]="i" class="luggage-item">
+    <h4>Luggage Count {{i + 1}}</h4>
+    
+    <div class="luggage-fields">
+      <!-- Luggage Number -->
+      <mat-form-field appearance="outline">
+        <mat-label>Luggage Number</mat-label>
+        <input matInput formControlName="luggageNumber" placeholder="Enter luggage number">
+        <mat-error *ngIf="luggage.get('luggageNumber')?.hasError('required')">
+          Luggage number is required
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Weight -->
+      <mat-form-field appearance="outline">
+        <mat-label>Weight (kg)</mat-label>
+        <input matInput type="number" formControlName="weight" placeholder="Enter weight">
+        <mat-error *ngIf="luggage.get('weight')?.hasError('required')">
+          Weight is required
+        </mat-error>
+        <mat-error *ngIf="luggage.get('weight')?.hasError('min')">
+          Weight must be at least 1 kg
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Type -->
+      <mat-form-field appearance="outline">
+        <mat-label>Luggage Type</mat-label>
+        <mat-select formControlName="type">
+          <mat-option value="carry-on">Carry-on</mat-option>
+          <mat-option value="checked">Checked Baggage</mat-option>
+          <mat-option value="personal">Personal Item</mat-option>
+          <mat-option value="oversized">Oversized</mat-option>
+        </mat-select>
+        <mat-error *ngIf="luggage.get('type')?.hasError('required')">
+          Luggage type is required
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Remove Button -->
+      
+      <button style="font-weight: bold;" matButton="elevated"  (click)="removeLuggage(i)" color="warn">
+        <mat-icon style="color: red;">delete</mat-icon> Delete
+      </button>
+    </div>
+  </div>
+
+  <!-- Add More Button -->
+  <div class="add-luggage-section">
+    <button type="button" mat-raised-button matButton="filled"  color="primary" (click)="addLuggage()">
+      <mat-icon>add</mat-icon>
+      Add More Luggage
+    </button>
+  </div>
+</div>
     
   </form>
 </div>

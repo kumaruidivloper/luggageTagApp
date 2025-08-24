@@ -1,7 +1,41 @@
 <div class="page-container">
   <mat-card  class="details-card">
+<div class="editable-container">
+  @if(!isEditing) {
+    <!-- Display Mode -->
+    <div @fadeInOut>
+      <button style="font-weight: bold;" matButton="elevated" matTooltip="Enter Passcode to enable edit" aria-label="Button that displays a tooltip when focused or hovered over" (click)="toggleEdit()">
+        <mat-icon>edit</mat-icon> Enter Passcode For Edit
+      </button>
+    </div>
+  }
+  
+  @if(isEditing) {
+    <!-- Edit Mode -->
+  <div @fadeInOut>
+    <mat-form-field appearance="outline">
+      <mat-label>Enter Passcode</mat-label>
+      <input #passcode matInput type="password"    (blur)="toggleEdit()" (keyup)="getPassCodeValue(passcode.value)"/>
+    </mat-form-field>
+    @if(isInvalidPasscode !== '') {
+      <mat-error style="font-weight: bold;">
+            {{isInvalidPasscode}}
+      </mat-error>
+    } @else if (isPasscodetrue) {
+        <mat-error style="font-weight: bold;">
+            <span style="color: green;">Success</span>
+        </mat-error>
+    }
+  </div>
+  }
+
+  
+</div>
+ 
   <div style="width: 100%; padding: 10px 0;">
-    <button matButton="tonal" (click)="openDialog()">Edit</button>
+    @if(isEditEnabled) {
+      <button matButton="tonal" (click)="openDialog()">Edit</button>
+    }
   </div>
   
   <div class="route-container">
@@ -103,6 +137,16 @@
         <span class="value">{{travelDetails.layoverTime}}</span>
       } @else {
         <span class="value">12hr</span>
+      }
+  </div>
+</div>
+<div class="extra-info">
+  <div class="info-item">
+    <span class="label">Passenger Name:</span>
+     @if(travelDetails) {
+        <span class="value">{{travelDetails.firstName}} {{travelDetails.lastName}}</span>
+      } @else {
+        <span class="value">Kumaravel Shanmugam</span>
       }
   </div>
 </div>

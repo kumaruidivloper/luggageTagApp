@@ -26,3 +26,43 @@ mat-card {
     grid-template-columns: 1fr;
   }
 }
+
+
+.luggage-item {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+  background-color: #fafafa;
+}
+
+.luggage-fields {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.luggage-fields mat-form-field {
+  flex: 1;
+  min-width: 200px;
+}
+
+.remove-button {
+  margin-top: 8px;
+}
+
+.add-luggage-section {
+  text-align: center;
+  margin-top: 16px;
+}
+
+@media (max-width: 768px) {
+  .luggage-fields {
+    flex-direction: column;
+  }
+  
+  .luggage-fields mat-form-field {
+    width: 100%;
+  }
+}
