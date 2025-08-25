@@ -34,6 +34,8 @@ cp -r dist/Flight-Luggage-Tracker-App/browser/* dist/Flight-Luggage-Tracker-App/
 
 npx angular-cli-ghpages --dir=dist/Flight-Luggage-Tracker-App
 
+npm run deploy:gh
+
 ## Run Server
 ng serve --host 0.0.0.0 --port 4200
 

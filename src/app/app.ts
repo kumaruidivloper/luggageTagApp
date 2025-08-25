@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject , OnInit} from '@angular/core';
 import {
   MatDialog,
   MAT_DIALOG_DATA,
@@ -8,6 +8,7 @@ import {
 import { FormEdit } from './form-edit/form-edit';
 import { ChangeDetectorRef } from '@angular/core';
 import { trigger, transition, style, animate } from '@angular/animations';
+import { LuggageService } from './services/luggage-service'
 
 @Component({
   selector: 'app-root',
@@ -26,7 +27,7 @@ import { trigger, transition, style, animate } from '@angular/animations';
     ])
   ]
 })
-export class App {
+export class App implements OnInit {
   protected title = 'Flight-Luggage-Tracker-App';
   isEditEnabled: boolean = false;
   isEditing: boolean = false;
@@ -35,28 +36,17 @@ export class App {
   isInvalidPasscode: string = '';
   isPasscodetrue: boolean = false;
 
-  travelDetails: any = {
-    firstName: 'Kumaravel',
-    lastName: 'Shanmugam',
-    from: 'Bengaluru',
-    to: 'Singapore',
-    flightService: 'Singapore Airlines',
-    hasLayover: true,
-    layoverFrom: 'Singapore',
-    layoverTo: 'Sydney',
-    layoverTime: '12hrs',
-    contactNumber: '+919945729262'
-  };
+  travelDetails: any;
 
-  constructor(private dialog: MatDialog, private cdr: ChangeDetectorRef) {}
+  constructor(private dialog: MatDialog, private cdr: ChangeDetectorRef, private luggageService: LuggageService) {}
 
   openDialog() {
     const dialogRef = this.dialog.open(FormEdit, {
-      width: '950px',
-    maxWidth: '95vw', // Responsive max width
-    height: '600px',   // Optional height
-    panelClass: 'custom-dialog-container', // Optional custom CSS class
-      data: this.travelDetails
+        width: '950px',
+        maxWidth: '95vw', // Responsive max width
+        height: '600px',   // Optional height
+        panelClass: 'custom-dialog-container', // Optional custom CSS class
+        data: this.travelDetails
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -65,9 +55,36 @@ export class App {
         this.travelDetails = result;
         this.cdr.detectChanges();
       }
-      
     });
   }
+
+  ngOnInit(): void {
+    this.luggageService.getById('1').subscribe({
+    next: (data) => {
+      this.travelDetails = data;   // ✅ assign actual data here
+      this.cdr.detectChanges();
+    },
+    error: (err) => console.error('Error loading record:', err)
+  });
+  }
+  
+  getLuggageIcon(type: string): string {
+  const icons: { [key: string]: string } = {
+    'checked': 'card_travel',
+    'carry-on': 'card_travel',
+    'personal': 'card_travel',
+    'oversized': 'card_travel'
+  };
+  return icons[type] || 'card_travel';
+}
+
+//  getDetailIcon(detail) {
+//             const icons = {
+//                 'number': 'fas fa-hashtag',
+//                 'weight': 'fas fa-weight-hanging'
+//             };
+//             return icons[detail] || 'fas fa-info';
+//         }
 
 
   toggleEdit() {
@@ -81,6 +98,7 @@ export class App {
         setTimeout(() => {
           this.openDialog();
           this.isPasscodetrue = false;
+          this.cdr.detectChanges();
         }, 1500);
      } else if(value == ''){
         this.isInvalidPasscode = ''

@@ -31,44 +31,76 @@
 
   
 </div>
- 
   <div style="width: 100%; padding: 10px 0;">
     @if(isEditEnabled) {
       <button matButton="tonal" (click)="openDialog()">Edit</button>
     }
   </div>
-  
+
+  <!-- Main Route Section (Always shown) -->
+<div class="route-section" [style.animation-delay]="'0.3s'">
+  <div class="route-header">
+    <h2 class="route-title">
+      <i class="fas fa-plane-departure"></i>
+      Main Route
+    </h2>
+    <p class="route-subtitle">Primary flight journey</p>
+  </div>
+
   <div class="route-container">
     <!-- From -->
     <div class="city">
       @if(travelDetails) {
         <h3>{{travelDetails.from}}</h3>
       } @else {
-        <h3>Bengaluru</h3>
+        <h3>Melbourne</h3>
       }
       <span class="label">Departure</span>
     </div>
 
-    <!-- Flight Icon -->
-    <div class="flight-icon">
-      <mat-icon class="plane">flight_takeoff</mat-icon>
-      <div class="dashed-line"></div>
-      <mat-icon class="plane">flight_land</mat-icon>
+    <!-- Flight Path -->
+    <div class="flight-path">
+      <div class="flight-line"></div>
+      <div class="plane-icon">
+        <mat-icon>flight_takeoff</mat-icon>
+      </div>
+      <div class="flight-dots">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
     </div>
 
     <!-- To -->
     <div class="city">
-       @if(travelDetails) {
+      @if(travelDetails) {
         <h3>{{travelDetails.to}}</h3>
       } @else {
-        <h3>Sydney</h3>
+        <h3>Singapore</h3>
       }
       <span class="label">Arrival</span>
     </div>
   </div>
+</div>
   
-  @if(travelDetails.hasLayover) {
-    <div style="border: solid 1px #807c7c; width: 100%; padding: 1px 0; background-color: #807c7c; margin: 10px 0;"></div>
+  @if(travelDetails != null && travelDetails.hasLayover) {
+  <!-- Fancy Section Divider -->
+  <div class="section-divider"></div>
+
+  <!-- Layover Route Section -->
+  <div class="route-section">
+    <div class="layover-badge">
+      <i class="fas fa-stopwatch"></i> Layover
+    </div>
+    
+    <div class="route-header">
+      <h2 class="route-title">
+        <i class="fas fa-route"></i>
+        Flight Connection
+      </h2>
+      <p class="route-subtitle">Connecting flight details with layover</p>
+    </div>
 
     <div class="route-container">
       <!-- From -->
@@ -76,16 +108,31 @@
         @if(travelDetails) {
           <h3>{{travelDetails.layoverFrom}}</h3>
         } @else {
-          <h3>Bengaluru</h3>
+          <h3>Singapore</h3>
         }
         <span class="label">Departure</span>
       </div>
 
-      <!-- Flight Icon -->
-      <div class="flight-icon">
-        <mat-icon class="plane">flight_takeoff</mat-icon>
-        <div class="dashed-line"></div>
-        <mat-icon class="plane">flight_land</mat-icon>
+      <!-- Flight Path -->
+      <div class="flight-path">
+        <div class="flight-line"></div>
+        <div class="plane-icon">
+          <mat-icon>flight_takeoff</mat-icon>
+        </div>
+        <div class="flight-dots">
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+        </div>
+        <div class="layover-info">
+          <i class="fas fa-clock"></i> 
+          @if(travelDetails) {
+            {{travelDetails.layoverTime}} layover
+          } @else {
+            14hr layover
+          }
+        </div>
       </div>
 
       <!-- To -->
@@ -93,17 +140,21 @@
         @if(travelDetails) {
           <h3>{{travelDetails.layoverTo}}</h3>
         } @else {
-          <h3>Bengaluru</h3>
+          <h3>Chennai</h3>
         }
         <span class="label">Arrival</span>
       </div>
     </div>
-  }
+  </div>
+}
   
-  
-
-  
-  
+  <div class="luggage-header">
+    <h2>
+      <i class="fas fa-suitcase"></i> 
+      Passenger Details
+    </h2>
+    <p>Passenger information at a glance</p>
+  </div>
 
   <!-- Airline & Layover -->
 <div class="extra-info">
@@ -140,15 +191,80 @@
       }
   </div>
 </div>
-<div class="extra-info">
-  <div class="info-item">
-    <span class="label">Passenger Name:</span>
-     @if(travelDetails) {
-        <span class="value">{{travelDetails.firstName}} {{travelDetails.lastName}}</span>
-      } @else {
-        <span class="value">Kumaravel Shanmugam</span>
-      }
-  </div>
-</div>
+
+<div class="luggage-container">
+      <div class="luggage-header">
+        <h2>
+          <i class="fas fa-suitcase"></i> 
+          Travel Luggage
+        </h2>
+        <p>Your baggage information at a glance</p>
+      </div>
+
+      <div class="luggage-grid">
+        @if(travelDetails?.luggage && travelDetails.luggage.length > 0) {
+          @for(luggage of travelDetails.luggage; track $index) {
+            <div 
+              class="luggage-card fade-in" 
+              [style.animation-delay.s]="$index * 0.1">     
+              <div class="card-header">
+                <div class="card-title">
+                  <div class="luggage-icon">
+                    <mat-icon> {{getLuggageIcon(luggage.type)}}</mat-icon>
+                  </div>
+                  <h3>Luggage {{$index + 1}}</h3>
+                </div>
+                <mat-icon> {{getLuggageIcon(luggage.type)}}</mat-icon>
+                <div 
+                  class="luggage-type-badge" 
+                  [ngClass]="'type-' + luggage.type.replace('-', '_')">
+                  {{luggage.type | titlecase}}
+                </div>
+              </div>
+              
+              <div class="luggage-details">
+                <div class="detail-item">
+                  <div class="detail-icon">
+                    <i class="fas fa-hashtag"></i>
+                  </div>
+                  <div class="detail-content">
+                    <div class="detail-label">Luggage Number</div>
+                    <div class="detail-value">#{{luggage.luggageNumber}}</div>
+                  </div>
+                </div>
+                
+                <div class="detail-item">
+                  <div class="detail-icon">
+                    <i class="fas fa-weight-hanging"></i>
+                  </div>
+                  <div class="detail-content">
+                    <div class="detail-label">Weight</div>
+                    <div class="detail-value">{{luggage.weight}} kg</div>
+                  </div>
+                </div>
+
+                <div class="detail-item">
+                  <div class="detail-icon">
+                    <i class="fas fa-weight-hanging"></i>
+                  </div>
+                  <div class="detail-content">
+                    <div class="detail-label">Luggage Info</div>
+                    <div class="detail-value">{{luggage.info}}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          }
+        } @else {
+          <div class="no-luggage fade-in">
+            <div class="no-luggage-icon">
+              <i class="fas fa-suitcase"></i>
+            </div>
+            <h3>No Luggage Information</h3>
+            <p>No baggage details have been added yet.</p>
+          </div>
+        }
+      </div>
+    </div>
 </mat-card>
 </div>
