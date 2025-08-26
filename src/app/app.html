@@ -159,8 +159,8 @@
       Passenger Details
     </h2>
     <p class="passengerDetails">Passenger information at a glance</p>
-    <div class="baggage-card cabin time"> 🕒 Date Of Travel <span style="border: solid 1px #ff9966; padding: 5px 15px; border-radius: 10px; margin-left: 10px;"> {{travelDetails.dot | date}}</span></div>
-    <div class="baggage-card cabin email"> ✉️ {{travelDetails.email}}</div>
+    <div class="baggage-card cabin time"> 🕒 Date Of Travel <span style="border: solid 1px #ff9966; padding: 5px 15px; border-radius: 10px; margin-left: 10px;"> {{travelDetails?.dot | date}}</span></div>
+    <div class="baggage-card cabin email"> ✉️ {{travelDetails?.email}}</div>
   </div>
 
   <!-- Airline & Layover -->
