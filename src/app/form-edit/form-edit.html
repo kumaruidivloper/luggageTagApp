@@ -219,5 +219,23 @@
 <mat-dialog-actions align="end">
   <!-- <button matButton="tonal">Reset</button> -->
   <button matButton="tonal" mat-dialog-close>Cancel</button>
-  <button type="submit" [mat-dialog-close]="true" cdkFocusInitial matButton="filled" [disabled]="!travelForm.valid" (click)="onSubmit()" [attr.cdkFocusInitial]="travelForm.valid ? '' : null">Submit</button>
+  <button 
+  matButton="elevated"
+  type="submit"
+  [disabled]="isSubmitting || travelForm.invalid"
+  (click)="onSubmit()">
+  
+  @if(isSubmitting) {
+    <mat-spinner 
+    diameter="20" 
+    color="accent"
+    style="display: inline-block; margin-right: 8px;">
+  </mat-spinner>
+  }
+  
+  
+  <mat-icon *ngIf="!isSubmitting" style="margin-right: 8px;">send</mat-icon>
+  
+  {{ isSubmitting ? 'Updating...' : 'Submit Travel Details' }}
+</button>
 </mat-dialog-actions>

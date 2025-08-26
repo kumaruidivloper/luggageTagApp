@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { LuggageService } from './../services/luggage-service';
 import { ChangeDetectorRef } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-form-edit',
@@ -14,6 +15,7 @@ export class FormEdit implements OnInit {
 travelForm: FormGroup;
 recordId: string = '1';
 travelDetails: any;
+isSubmitting: boolean = false;
 
   flightServices = ['Singapore Airlines', 'Qantas', 'Emirates', 'Etihad'];
 
@@ -21,7 +23,8 @@ travelDetails: any;
     private dialogRef: MatDialogRef<FormEdit>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private luggageService: LuggageService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private snackBar: MatSnackBar
   ) {
     this.travelForm = this.fb.group({
       firstName: ['', [Validators.required, Validators.minLength(2)]],
@@ -84,19 +87,45 @@ removeLuggage(index: number, event: Event): void {
   this.luggageArray.removeAt(index);
 }
 
-  onSubmit() {
+onSubmit() {
     if (this.travelForm.valid) {
-      this.dialogRef.close(this.travelForm.value);
-      console.log('✅ Travel Details Submitted:', this.travelForm.value);
+      // Set loading state
+      this.isSubmitting = true;
+      
+      const payload = this.travelForm.value;
+
+      this.luggageService.updateRecord(this.recordId, payload).subscribe({
+        next: (updated) => {
+          this.isSubmitting = false; // Reset loading state
+          
+          this.snackBar.open('Travel details updated successfully!', 'Close', {
+            duration: 5000,
+            panelClass: ['success-snackbar']
+          });
+          
+          console.log('✅ Travel Details Submitted:', this.travelForm.value);
+          console.log('Success:', updated);
+          
+          this.dialogRef.close(this.travelForm.value);
+        },
+        error: (err) => {
+          this.isSubmitting = false; // Reset loading state
+          
+          this.snackBar.open('Failed to update travel details. Please try again.', 'Close', {
+            duration: 7000,
+            panelClass: ['error-snackbar']
+          });
+          
+          console.error('Error:', err);
+        }
+      });
     } else {
       this.travelForm.markAllAsTouched();
+      this.snackBar.open('Please fill in all required fields correctly.', 'Close', {
+        duration: 4000,
+        panelClass: ['warning-snackbar']
+      });
     }
-
-    const payload = this.travelForm.value;
-    this.luggageService.updateRecord(this.recordId, payload).subscribe({
-      next: updated => console.log('Success:', updated),
-      error: err => console.error('Error:', err)
-    });
   }
 
   // convenience getter for template

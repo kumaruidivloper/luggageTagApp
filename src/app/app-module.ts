@@ -29,6 +29,7 @@ import { CommonModule } from '@angular/common';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
   CommonModule,
   MatSlideToggleModule,
   MatButtonToggleModule,
+  MatProgressSpinnerModule,
   HttpClientModule
   ],
   providers: [
