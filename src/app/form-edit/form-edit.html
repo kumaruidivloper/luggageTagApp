@@ -1,4 +1,4 @@
-<h2 mat-dialog-title>Travel Details Form</h2>
+<h2 mat-dialog-title>🧳 <span class="formTiltleStyle">Travel Bags Details Form</span></h2>
 <mat-dialog-content class="mat-typography">
 <div style="padding: 15px 15px 15px 15px; background-color: #f1f3f5;">
     <form [formGroup]="travelForm" (ngSubmit)="onSubmit()">
@@ -20,7 +20,7 @@
         <mat-label>Last Name</mat-label>
         <input matInput formControlName="lastName" />
         @if(travelForm.get('lastName')?.hasError('required')) {
-            <mat-error *ngIf="travelForm.get('lastName')?.hasError('required')">
+            <mat-error>
             Last name is required
             </mat-error>
         }
@@ -92,7 +92,7 @@
             </mat-error>
         }
         @if(travelForm.get('contactNumber')?.hasError('pattern')) {
-            <mat-error *ngIf="travelForm.get('contactNumber')?.hasError('pattern')">
+            <mat-error>
                 Enter a valid 10-digit number
             </mat-error>
         }
@@ -109,7 +109,7 @@
             <mat-label>Layover From</mat-label>
             <input matInput formControlName="layoverFrom" />
             @if(travelForm.get('layoverFrom')?.hasError('required')) {
-                <mat-error *ngIf="travelForm.get('layoverFrom')?.hasError('required')">
+                <mat-error>
                     Layover origin is required
                 </mat-error>
             }
@@ -119,7 +119,7 @@
             <mat-label>Layover To</mat-label>
             <input matInput formControlName="layoverTo" />
             @if(travelForm.get('layoverTo')?.hasError('required')) {
-                <mat-error *ngIf="travelForm.get('layoverTo')?.hasError('required')">
+                <mat-error>
                     Layover destination is required
                 </mat-error>
             }
@@ -198,7 +198,7 @@
 
       <!-- Remove Button -->
       <button style="font-weight: bold;" matButton="elevated"  (click)="removeLuggage(i, $event)" color="warn">
-        <mat-icon style="color: red;">delete</mat-icon> Delete
+        <mat-icon class="deleteButtonStyle">delete</mat-icon> Delete
       </button>
     </div>
   </div>

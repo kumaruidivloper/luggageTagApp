@@ -86,3 +86,19 @@ mat-card {
   background-color: #2196f3 !important;
   color: white !important;
 }
+
+.formTiltleStyle
+{
+  font-size: 20px; font-weight: bold; font-style: italic;
+  background: linear-gradient(-260deg, #667eea, #764ba2, #f093fb, #f5576c);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  border: solid 1px #00000021;
+  padding: 4px 25px;
+  border-radius: 25px;
+}
+.deleteButtonStyle {
+  background: linear-gradient(-260deg, #667eea, #c5350d, #f093fb, #f5576c);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
