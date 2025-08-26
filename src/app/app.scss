@@ -1138,6 +1138,26 @@ mat-card {
     margin-right: 5px;
     }
 }
+.errorPasscode {
+    background: linear-gradient(80deg, #d12b25, #ed2709, #af301d, #810717);
+    font-weight: bold;
+    color: rgb(255, 255, 255);
+    padding: 8px;
+    border-radius: 30px;
+    margin-top: -10px;
+}
+
+.successPasscode {
+  background: linear-gradient(30deg, #048913, #08d549, #0c3f1b, #1bd14c);
+    font-weight: bold;
+    color: rgb(255, 255, 255);
+    padding: 8px;
+    border-radius: 30px;
+    margin-top: -10px;
+}
+
+
+
 
 
 

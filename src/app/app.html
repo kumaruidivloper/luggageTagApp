@@ -4,9 +4,6 @@
   @if(!isEditing) {
     <!-- Display Mode -->
     <div @fadeInOut>
-      <!-- <button class="editButton" style="font-weight: bold;" matButton="elevated" matTooltip="Enter Passcode to enable edit" aria-label="Button that displays a tooltip when focused or hovered over">
-        <mat-icon>edit</mat-icon> Enter Passcode For Edit
-      </button> -->
        <div class="baggage-card cabin time editButton" (click)="toggleEdit()"><mat-icon>edit</mat-icon> Enter Passcode For Edit</div>
     </div>
   }
@@ -19,12 +16,12 @@
       <input #passcode matInput type="password"    (blur)="toggleEdit()" (keyup)="getPassCodeValue(passcode.value)"/>
     </mat-form-field>
     @if(isInvalidPasscode !== '') {
-      <mat-error style="font-weight: bold;">
+      <mat-error class="errorPasscode">
             {{isInvalidPasscode}}
       </mat-error>
     } @else if (isPasscodetrue) {
-        <mat-error style="font-weight: bold;">
-            <span style="color: green;">Success</span>
+        <mat-error class="successPasscode">
+            Passcode Success
         </mat-error>
     }
   </div>
