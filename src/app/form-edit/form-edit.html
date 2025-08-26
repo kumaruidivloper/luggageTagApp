@@ -26,6 +26,29 @@
         }
       </mat-form-field>
 
+       <mat-form-field appearance="outline">
+            <mat-label>DOT</mat-label>
+            <input matInput [matDatepicker]="dob" formControlName="dot" placeholder="MM/DD/YYYY">
+            <mat-hint></mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="dob"></mat-datepicker-toggle>
+            <mat-datepicker #dob></mat-datepicker>
+            @if(travelForm.get('dot')?.hasError('required')) {
+              <mat-error>
+                Dot is required
+              </mat-error>
+            }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input matInput type="email" placeholder="Ex. test@gmail.com" formControlName="email">
+            @if(travelForm.get('email')?.hasError('required')) {
+              <mat-error>
+                Email is required
+              </mat-error>
+            }
+        </mat-form-field>
+
       <!-- Flight Service -->
       <mat-form-field appearance="outline">
         <mat-label>Flight Service</mat-label>
@@ -194,7 +217,7 @@
   
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button matButton="tonal">Reset</button>
+  <!-- <button matButton="tonal">Reset</button> -->
   <button matButton="tonal" mat-dialog-close>Cancel</button>
   <button type="submit" [mat-dialog-close]="true" cdkFocusInitial matButton="filled" [disabled]="!travelForm.valid" (click)="onSubmit()" [attr.cdkFocusInitial]="travelForm.valid ? '' : null">Submit</button>
 </mat-dialog-actions>

@@ -35,6 +35,8 @@ export class App implements OnInit {
   value: string = 'Enter Passcode to enable edit';
   isInvalidPasscode: string = '';
   isPasscodetrue: boolean = false;
+  cabinWeight: number = 0;
+  checkinWeight: number = 0;
 
   travelDetails: any;
 
@@ -53,6 +55,7 @@ export class App implements OnInit {
       if(result) {
         console.log(`Dialog result: ${result}`);
         this.travelDetails = result;
+        this.getLuggageWeight(result);
         this.cdr.detectChanges();
       }
     });
@@ -62,6 +65,7 @@ export class App implements OnInit {
     this.luggageService.getById('1').subscribe({
     next: (data) => {
       this.travelDetails = data;   // ✅ assign actual data here
+      this.getLuggageWeight(data);
       this.cdr.detectChanges();
     },
     error: (err) => console.error('Error loading record:', err)
@@ -89,6 +93,21 @@ export class App implements OnInit {
 
   toggleEdit() {
     this.isEditing = !this.isEditing;
+  }
+
+  getLuggageWeight(data: any) {
+     this.cabinWeight = 0;
+     this.checkinWeight = 0;
+     data.luggage.forEach((item: any) => {
+        switch(item.type) {
+          case 'carry-on':
+          this.cabinWeight += item.weight;
+          break;
+          default:
+          this.checkinWeight += item.weight;
+        }
+          
+     });
   }
 
   getPassCodeValue(value: string) {

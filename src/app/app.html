@@ -4,9 +4,10 @@
   @if(!isEditing) {
     <!-- Display Mode -->
     <div @fadeInOut>
-      <button style="font-weight: bold;" matButton="elevated" matTooltip="Enter Passcode to enable edit" aria-label="Button that displays a tooltip when focused or hovered over" (click)="toggleEdit()">
+      <!-- <button class="editButton" style="font-weight: bold;" matButton="elevated" matTooltip="Enter Passcode to enable edit" aria-label="Button that displays a tooltip when focused or hovered over">
         <mat-icon>edit</mat-icon> Enter Passcode For Edit
-      </button>
+      </button> -->
+       <div class="baggage-card cabin time editButton" (click)="toggleEdit()"><mat-icon>edit</mat-icon> Enter Passcode For Edit</div>
     </div>
   }
   
@@ -41,7 +42,7 @@
 <div class="route-section" [style.animation-delay]="'0.3s'">
   <div class="route-header">
     <h2 class="route-title">
-      <i class="fas fa-plane-departure"></i>
+      <mat-icon class="flightIconColor land main"> local_airport</mat-icon>
       Main Route
     </h2>
     <p class="route-subtitle">Primary flight journey</p>
@@ -56,6 +57,7 @@
         <h3>Melbourne</h3>
       }
       <span class="label">Departure</span>
+      <mat-icon class="flightIconColor">flight_takeoff</mat-icon>
     </div>
 
     <!-- Flight Path -->
@@ -80,6 +82,7 @@
         <h3>Singapore</h3>
       }
       <span class="label">Arrival</span>
+      <mat-icon class="flightIconColor land">flight_land</mat-icon>
     </div>
   </div>
 </div>
@@ -95,8 +98,8 @@
     </div>
     
     <div class="route-header">
-      <h2 class="route-title">
-        <i class="fas fa-route"></i>
+      <h2 class="route-title layover">
+        <mat-icon class="flightIconColor land main secondflight"> local_airport</mat-icon>
         Flight Connection
       </h2>
       <p class="route-subtitle">Connecting flight details with layover</p>
@@ -111,6 +114,7 @@
           <h3>Singapore</h3>
         }
         <span class="label">Departure</span>
+        <mat-icon class="flightIconColor">flight_takeoff</mat-icon>
       </div>
 
       <!-- Flight Path -->
@@ -143,17 +147,20 @@
           <h3>Chennai</h3>
         }
         <span class="label">Arrival</span>
+        <mat-icon class="flightIconColor land">flight_land</mat-icon>
       </div>
     </div>
   </div>
 }
   
   <div class="luggage-header">
-    <h2>
-      <i class="fas fa-suitcase"></i> 
+    <h2 class="passengerDetails">
+      <mat-icon>face</mat-icon>
       Passenger Details
     </h2>
-    <p>Passenger information at a glance</p>
+    <p class="passengerDetails">Passenger information at a glance</p>
+    <div class="baggage-card cabin time"> 🕒 Date Of Travel <span style="border: solid 1px #ff9966; padding: 5px 15px; border-radius: 10px; margin-left: 10px;"> {{travelDetails.dot | date}}</span></div>
+    <div class="baggage-card cabin email"> ✉️ {{travelDetails.email}}</div>
   </div>
 
   <!-- Airline & Layover -->
@@ -194,13 +201,14 @@
 
 <div class="luggage-container">
       <div class="luggage-header">
-        <h2>
-          <i class="fas fa-suitcase"></i> 
+        <h2 class="luggageDetials">
+          <mat-icon>work</mat-icon>
           Travel Luggage
         </h2>
-        <p>Your baggage information at a glance</p>
+        <p class="luggageDetials">Your baggage information at a glance</p>
       </div>
-
+      <div class="baggage-card cabin">🧳 Cabin Luggage Weight: {{cabinWeight}}Kg</div>
+      <div class="baggage-card checkin">🎒 Check-in Luggage Weight: {{checkinWeight}}Kg</div>
       <div class="luggage-grid">
         @if(travelDetails?.luggage && travelDetails.luggage.length > 0) {
           @for(luggage of travelDetails.luggage; track $index) {
@@ -210,32 +218,31 @@
               <div class="card-header">
                 <div class="card-title">
                   <div class="luggage-icon">
-                    <mat-icon> {{getLuggageIcon(luggage.type)}}</mat-icon>
+                    <mat-icon>business_center</mat-icon>
                   </div>
-                  <h3>Luggage {{$index + 1}}</h3>
+                  <h3>Luggage <span class="luggageCountStyle">{{$index + 1}}</span></h3>
                 </div>
-                <mat-icon> {{getLuggageIcon(luggage.type)}}</mat-icon>
                 <div 
                   class="luggage-type-badge" 
                   [ngClass]="'type-' + luggage.type.replace('-', '_')">
-                  {{luggage.type | titlecase}}
+                  <mat-icon class="smallIcon"> card_travel</mat-icon>{{luggage.type | titlecase}}
                 </div>
               </div>
               
               <div class="luggage-details">
                 <div class="detail-item">
                   <div class="detail-icon">
-                    <i class="fas fa-hashtag"></i>
+                   <mat-icon> {{getLuggageIcon(luggage.type)}}</mat-icon>
                   </div>
                   <div class="detail-content">
-                    <div class="detail-label">Luggage Number</div>
+                    <div class="detail-label">Luggage ID</div>
                     <div class="detail-value">#{{luggage.luggageNumber}}</div>
                   </div>
                 </div>
                 
                 <div class="detail-item">
                   <div class="detail-icon">
-                    <i class="fas fa-weight-hanging"></i>
+                    <mat-icon>fitness_center</mat-icon>
                   </div>
                   <div class="detail-content">
                     <div class="detail-label">Weight</div>
@@ -245,7 +252,7 @@
 
                 <div class="detail-item">
                   <div class="detail-icon">
-                    <i class="fas fa-weight-hanging"></i>
+                    <mat-icon>info</mat-icon>
                   </div>
                   <div class="detail-content">
                     <div class="detail-label">Luggage Info</div>
@@ -258,7 +265,7 @@
         } @else {
           <div class="no-luggage fade-in">
             <div class="no-luggage-icon">
-              <i class="fas fa-suitcase"></i>
+              <mat-icon>work_off</mat-icon>
             </div>
             <h3>No Luggage Information</h3>
             <p>No baggage details have been added yet.</p>

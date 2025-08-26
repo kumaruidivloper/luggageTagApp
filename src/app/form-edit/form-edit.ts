@@ -27,12 +27,14 @@ travelDetails: any;
       firstName: ['', [Validators.required, Validators.minLength(2)]],
       lastName: ['', [Validators.required, Validators.minLength(2)]],
       from: ['', Validators.required],
+      dot: ['', Validators.required],
       to: ['', Validators.required],
       flightService: ['', Validators.required],
       hasLayover: [false],
       layoverFrom: [''],
       layoverTo: [''],
       layoverTime: [''],
+      email: ['', [Validators.required, Validators.email]],
       contactNumber: ['', [Validators.required, Validators.pattern('^[0-9]{10,15}$')]],
       luggage: this.fb.array([])
     });
@@ -125,7 +127,9 @@ removeLuggage(index: number, event: Event): void {
     layoverFrom: data.layoverFrom || '',
     layoverTo: data.layoverTo || '',
     layoverTime: data.layoverTime || '',
-    contactNumber: data.contactNumber || ''
+    contactNumber: data.contactNumber || '',
+    dot: data.dot || '',
+    email: data.email || '',
   });
 
   // Handle FormArray separately
@@ -147,9 +151,7 @@ patchLuggageArray(data: any): void {
         }));
       });
     } else {
-      
     }
-}
-
+  }
 
 }

@@ -6,9 +6,11 @@
   text-align: center;
 
   width: 100%;
-  max-width: 600px;
+  max-width: 900px;
   margin: 20px auto; /* center the card itself */
   padding: 20px;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.15);
 
   .route-container {
     display: flex;
@@ -19,7 +21,7 @@
 
     @media (max-width: 600px) {
       flex-direction: column;
-      gap: 180px;
+      gap: 90px;
 
       .layover-info {
         bottom: 120px;
@@ -30,10 +32,12 @@
       h3 {
         margin: 0;
         font-size: 1.5rem;
+        cursor: default;
       }
       .label {
         font-size: 0.9rem;
         color: gray;
+        cursor: default;
       }
     }
 
@@ -221,7 +225,10 @@ mat-card {
       font-size: 1.5rem;
       font-weight: 600;
       margin: 0;
-    }
+      background: linear-gradient(90deg, #667eea, #764ba2, #f093fb, #f5576c);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+     }
 
     .luggage-type-badge {
       padding: 8px 16px;
@@ -720,11 +727,20 @@ mat-card {
   align-items: center;
   justify-content: center;
   gap: 16px;
+  background: linear-gradient(90deg, #667eea, #764ba2, #f093fb, #f5576c);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 
   i {
     color: #667eea;
     font-size: 1.8rem;
   }
+}
+
+.route-title.layover {
+  background: linear-gradient(260deg, #667eea, #764ba2, #f093fb, #f5576c);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .route-subtitle {
@@ -766,16 +782,16 @@ mat-card {
     background: linear-gradient(135deg, rgba(102, 126, 234, 0.12), rgba(255, 255, 255, 0.95));
   }
 
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, #667eea, #764ba2);
-    border-radius: 24px 24px 0 0;
-  }
+  // &::before {
+  //   content: '';
+  //   position: absolute;
+  //   top: 0;
+  //   left: 0;
+  //   right: 0;
+  //   height: 4px;
+  //   background: linear-gradient(90deg, #667eea, #764ba2);
+  //   border-radius: 24px 24px 0 0;
+  // }
 
   h3 {
     color: #2d3748;
@@ -800,11 +816,12 @@ mat-card {
     gap: 8px;
 
     &::before, &::after {
-      content: '';
-      width: 8px;
+      content: "";
+      width: 4px;
       height: 8px;
       background: #667eea;
       border-radius: 50%;
+      opacity: 0.2;
     }
   }
 }
@@ -883,12 +900,12 @@ mat-card {
 
 .layover-info {
   position: absolute;
-  bottom: -30px;
+  top: 103px;
   left: 50%;
   transform: translateX(-50%);
   background: rgba(240, 147, 251, 0.9);
   color: white;
-  padding: 8px 16px;
+  padding: 10px 16px;
   border-radius: 20px;
   font-size: 0.8rem;
   font-weight: 600;
@@ -974,7 +991,7 @@ mat-card {
   .flight-path {
     width: 100%;
     height: 80px;
-    transform: rotate(90deg);
+    transform: rotate(0deg);
   }
   
   .city {
@@ -989,5 +1006,140 @@ mat-card {
   .route-title {
     font-size: 1.6rem;
   }
+
+  .layover-info {
+    top: 45px;
+    padding: 15px 16px;
+  }
+  
 }
+
+.baggage-card {
+  margin: 15px auto;
+  padding: 15px 25px;
+  width: fit-content;
+  font-size: 12px;
+  font-weight: 600;
+  color: #fff;
+  border-radius: 14px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  letter-spacing: 0.5px;
+}
+
+.baggage-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.5),
+    transparent
+  );
+  transform: skewX(-20deg);
+}
+
+.baggage-card:hover {
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+}
+
+.baggage-card:hover::before {
+  animation: shimmer 1.5s ease-in-out forwards;
+}
+
+
+/* Color variations */
+.cabin {
+  background: linear-gradient(135deg, #ff9966, #ff5e62);
+}
+
+.cabin.email {
+  background: linear-gradient(260deg, #382f9d, #ff5e62);
+}
+
+.cabin.time {
+  background: linear-gradient(260deg, #cc1b94, #e6e209);
+}
+
+.checkin {
+  background: linear-gradient(135deg, #01f72e, #e100ff);
+}
+
+.flightIconColor{ 
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  opacity: 0.7;
+}
+.flightIconColor.land {
+  opacity: 1;
+}
+.flightIconColor.land.main {
+  background: linear-gradient(90deg, #667eea, #764ba2, #f093fb, #f5576c);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  border: dotted 1px #0000001a;
+  padding: 5px;
+  border-radius: 20px;
+  transform: rotate(-45deg);
+}
+.flightIconColor.land.main.secondflight {
+  background: linear-gradient(260deg, #667eea, #764ba2, #f093fb, #f5576c);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transform: rotate(45deg);
+}
+.luggage-type-badge {
+  .smallIcon {
+  font-size: 10px;
+  height: 10px;
+}
+}
+.luggageCountStyle
+{
+  border: solid 1px #0000002c; 
+  padding: 3px 9px 3px 9px; 
+  border-radius: 22px; 
+  font-size: 18px;
+  background: linear-gradient(90deg, #667eea, #764ba2, #f093fb, #f5576c);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.passengerDetails {
+  background: linear-gradient(90deg, #667eea, #764ba2, #f093fb, #f5576c);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.luggageDetials {
+  background: linear-gradient(-260deg, #667eea, #764ba2, #f093fb, #f5576c);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.baggage-card.cabin.time.editButton {
+    background: linear-gradient(260deg, #8e1367, #090ee6);
+    border-radius: 33px;
+    margin: unset;
+    padding: 10px 18px;
+    font-size: 14px;
+    cursor: pointer;
+    mat-icon {
+          font-size: 12px;
+    height: 11px;
+    width: 15px;
+    margin-right: 5px;
+    }
+}
+
+
+
+
 
