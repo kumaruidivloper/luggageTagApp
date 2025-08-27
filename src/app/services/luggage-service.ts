@@ -6,7 +6,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class LuggageService {
-  private readonly baseUrl = 'https://68ab7cac7a0bbe92cbb7a261.mockapi.io/api/1/Luggage'; // capital L
+   //bsbkumarmax https://mockapi.io/
+  private readonly baseUrl = 'https://68ab7cac7a0bbe92cbb7a261.mockapi.io/api/1/Luggage'; 
 
   constructor(private http: HttpClient) {}
 

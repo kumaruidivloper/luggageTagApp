@@ -648,12 +648,12 @@ mat-card {
 
 
 .section-divider {
-  width: 100%;
-  max-width: 800px;
+  width: 50%;
+  max-width: 200px;
   height: 2px;
   background: linear-gradient(90deg, transparent, #667eea, #764ba2, #f093fb, transparent);
   border-radius: 2px;
-  margin: 20px auto;
+  margin: 25px 25px;
   position: relative;
   animation: shimmer 3s ease-in-out infinite;
 
@@ -666,6 +666,15 @@ mat-card {
     bottom: -1px;
     background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.3), rgba(118, 75, 162, 0.3), rgba(240, 147, 251, 0.3), transparent);
     filter: blur(2px);
+  }
+
+  .flightIconColor {
+    font-size: 50px;
+    height: 38px;
+    width: 50px;
+    position: absolute;
+    top: -35px;
+    left: 85px;
   }
 }
 
@@ -967,8 +976,8 @@ mat-card {
 }
 
 @keyframes shimmer {
-  0% { left: -100%; }
-  100% { left: 100%; }
+  0% { left: -50%; }
+  100% { left: 50%; }
 }
 
 @keyframes moveDot {
@@ -1011,6 +1020,37 @@ mat-card {
     top: 45px;
     padding: 15px 16px;
   }
+
+  .section-divider {
+  width: 50%;
+  max-width: 200px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #667eea, #764ba2, #f093fb, transparent);
+  border-radius: 2px;
+  margin: 25px 25px;
+  position: relative;
+  animation: shimmer 3s ease-in-out infinite;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.3), rgba(118, 75, 162, 0.3), rgba(240, 147, 251, 0.3), transparent);
+    filter: blur(2px);
+  }
+
+  .flightIconColor {
+    font-size: 50px;
+    height: 38px;
+    width: 50px;
+    position: absolute;
+    top: -35px;
+    left: 60px;
+  }
+}
   
 }
 
