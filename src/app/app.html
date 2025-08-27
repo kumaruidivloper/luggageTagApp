@@ -4,7 +4,7 @@
   @if(!isEditing) {
     <!-- Display Mode -->
     <div @fadeInOut>
-       <div class="baggage-card cabin time editButton" (click)="toggleEdit()"><mat-icon>edit</mat-icon> Enter Passcode For Edit</div>
+       <div class="baggage-card cabin time editButton gradient-btn btn-pulse" (click)="toggleEdit()"><mat-icon>edit</mat-icon> Enter Passcode For Edit</div>
     </div>
   }
   
@@ -203,9 +203,9 @@
           Travel Luggage
         </h2>
         <p class="luggageDetials">Your baggage information at a glance</p>
-      </div>
-      <div class="baggage-card cabin">🧳 Cabin Luggage Weight: {{cabinWeight}}Kg</div>
-      <div class="baggage-card checkin">🎒 Check-in Luggage Weight: {{checkinWeight}}Kg</div>
+      </div>  
+      <div class="gradient-btn btn-pulse">🧳 Cabin Luggage Weight: {{cabinWeight}}Kg</div>
+      <div class="gradient-btn btn-pulse">🎒 Check-in Luggage Weight: {{checkinWeight}}Kg</div>
       <div class="luggage-grid">
         @if(travelDetails?.luggage && travelDetails.luggage.length > 0) {
           @for(luggage of travelDetails.luggage; track $index) {
