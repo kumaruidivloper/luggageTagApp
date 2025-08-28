@@ -1181,22 +1181,27 @@ mat-card {
 }
 .errorPasscode {
     background: linear-gradient(80deg, #d12b25, #ed2709, #af301d, #810717);
-    font-weight: bold;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    border: solid 1px #00000016;
     color: rgb(255, 255, 255);
-    padding: 8px;
+    padding: 2px;
     border-radius: 30px;
     margin-top: -10px;
+    font-style: italic;
 }
 
 .successPasscode {
-  background: linear-gradient(30deg, #048913, #08d549, #0c3f1b, #1bd14c);
-    font-weight: bold;
+    background: linear-gradient(30deg, #048913, #08d549, #0c3f1b, #1bd14c);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    border: solid 1px #00000016;
     color: rgb(255, 255, 255);
-    padding: 8px;
+    padding: 2px;
     border-radius: 30px;
     margin-top: -10px;
     margin-bottom: 10px;
-    cursor: default;
+    font-style: italic;
 }
 
 

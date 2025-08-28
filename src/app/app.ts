@@ -94,9 +94,11 @@ export class App implements OnInit {
 
   toggleEdit() {
     this.isEditing = !this.isEditing;
-    this.passcode.nativeElement.value = '';
+    if(this.passcode) {
+      this.passcode.nativeElement.value = '';
+    }
     this.isInvalidPasscode = '';
-    this.isPasscodetrue = false;
+      this.isPasscodetrue = false;
   }
 
   getLuggageWeight(data: any) {
@@ -133,6 +135,11 @@ export class App implements OnInit {
     event.preventDefault();
     this.openDialog();
     this.isPasscodetrue = false;
+     if(this.passcode) {
+      this.passcode.nativeElement.value = '';
+    }
+    this.isInvalidPasscode = '';
+    this.isEditing = !this.isEditing;
   }
   
 }
