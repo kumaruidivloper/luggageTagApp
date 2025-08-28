@@ -1,4 +1,4 @@
-import { Component, inject , OnInit} from '@angular/core';
+import { Component, ElementRef, inject , OnInit, ViewChild} from '@angular/core';
 import {
   MatDialog,
   MAT_DIALOG_DATA,
@@ -29,9 +29,10 @@ import { LuggageService } from './services/luggage-service'
 })
 export class App implements OnInit {
   protected title = 'Flight-Luggage-Tracker-App';
+  @ViewChild('passcode') passcode!: ElementRef<HTMLInputElement>;
   isEditEnabled: boolean = false;
   isEditing: boolean = false;
-  passcode: string = 'lavakusa';
+  passcodeVar: string = 'lavakusa';
   value: string = 'Enter Passcode to enable edit';
   isInvalidPasscode: string = '';
   isPasscodetrue: boolean = false;
@@ -93,6 +94,9 @@ export class App implements OnInit {
 
   toggleEdit() {
     this.isEditing = !this.isEditing;
+    this.passcode.nativeElement.value = '';
+    this.isInvalidPasscode = '';
+    this.isPasscodetrue = false;
   }
 
   getLuggageWeight(data: any) {
@@ -111,7 +115,7 @@ export class App implements OnInit {
   }
 
   getPassCodeValue(value: string) {
-     if (this.passcode === value) {
+     if (this.passcodeVar === value) {
          this.isPasscodetrue = true;
          this.isInvalidPasscode = '';
         setTimeout(() => {
