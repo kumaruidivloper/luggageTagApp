@@ -129,7 +129,7 @@
         <div class="layover-info">
           <i class="fas fa-clock"></i> 
           @if(travelDetails) {
-            {{travelDetails.layoverTime}} layover
+            🕒 {{travelDetails.layoverTime}} layover
           } @else {
             14hr layover
           }
@@ -152,11 +152,11 @@
   
   <div class="luggage-header">
     <h2 class="passengerDetails">
-      <mat-icon>face</mat-icon>
+      <mat-icon class="iconCircle">face</mat-icon>
       Passenger Details
     </h2>
     <p class="passengerDetails">Passenger information at a glance</p>
-    <div class="baggage-card cabin time"> 🕒 Date Of Travel <span style="border: solid 1px #ff9966; padding: 5px 15px; border-radius: 10px; margin-left: 10px;"> {{travelDetails?.dot | date}}</span></div>
+    <div class="baggage-card cabin time"> 🕒 Date Of Travel <span class="travelDate"> {{travelDetails?.dot | date}}</span></div>
     <div class="baggage-card cabin email"> ✉️ {{travelDetails?.email}}</div>
   </div>
 
@@ -165,7 +165,7 @@
   <div class="info-item">
     <span class="label">Passenger Name:</span>
      @if(travelDetails) {
-        <span class="value">{{travelDetails.firstName}} {{travelDetails.lastName}}</span>
+        <span class="value">👨 {{travelDetails.firstName}} {{travelDetails.lastName}}</span>
       } @else {
         <span class="value">Kumaravel Shanmugam</span>
       }
@@ -173,25 +173,25 @@
   <div class="info-item">
     <span class="label">Contact Number:</span>
      @if(travelDetails) {
-        <span class="value">{{travelDetails.contactNumber}}</span>
+        <span class="value">📞 {{travelDetails.contactNumber}}</span>
       } @else {
         <span class="value">+91-9945729262</span>
       }
   </div>
   <div class="info-item">
-    <span class="label">Airline:</span>
+    <span class="label">Airline & <Code></Code>:</span>
      @if(travelDetails) {
-        <span class="value">{{travelDetails.flightService}}</span>
+        <span class="value">✈️ {{travelDetails.flightService}}</span>
       } @else {
         <span class="value">Qantaz</span>
       }
   </div>
   <div class="info-item">
     <span class="label">Layover:</span>
-    @if(travelDetails) {
-        <span class="value">{{travelDetails.layoverTime}}</span>
+    @if(travelDetails && travelDetails.hasLayover) {
+        <span class="value"> 🕒 {{travelDetails.layoverTime}}</span>
       } @else {
-        <span class="value">12hr</span>
+        <span class="value">No Layover</span>
       }
   </div>
 </div>
@@ -199,13 +199,13 @@
 <div class="luggage-container">
       <div class="luggage-header">
         <h2 class="luggageDetials">
-          <mat-icon>work</mat-icon>
+          <mat-icon class="iconCircle">work</mat-icon>
           Travel Luggage
         </h2>
         <p class="luggageDetials">Your baggage information at a glance</p>
       </div>  
-      <div class="gradient-btn btn-pulse">🧳 Cabin Luggage Weight: {{cabinWeight}}Kg</div>
-      <div class="gradient-btn btn-pulse">🎒 Check-in Luggage Weight: {{checkinWeight}}Kg</div>
+      <div class="gradient-btn btn-pulse"> <span style="font-size: 40px;">🎒</span> <span class="weightStyle">{{cabinWeight}} Kg</span></div>
+      <div class="gradient-btn btn-pulse"> <span style="font-size: 40px;">🧳</span> <span class="weightStyle">{{checkinWeight}} Kg</span></div>
       <div class="luggage-grid">
         @if(travelDetails?.luggage && travelDetails.luggage.length > 0) {
           @for(luggage of travelDetails.luggage; track $index) {
