@@ -115,14 +115,20 @@ export class App implements OnInit {
          this.isPasscodetrue = true;
          this.isInvalidPasscode = '';
         setTimeout(() => {
-          this.openDialog();
-          this.isPasscodetrue = false;
           this.cdr.detectChanges();
         }, 1500);
      } else if(value == ''){
         this.isInvalidPasscode = ''
+        this.isPasscodetrue = false;
      } else {
         this.isInvalidPasscode = 'Incorrect Passcode'
      }
   }
+
+  openForm(event: Event) {
+    event.preventDefault();
+    this.openDialog();
+    this.isPasscodetrue = false;
+  }
+  
 }
