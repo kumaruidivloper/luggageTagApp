@@ -8,7 +8,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:Flight-Luggage-Tracker-App": "node dist/Flight-Luggage-Tracker-App/server/server.mjs",
-      "deploy:gh": "ng build --configuration production --base-href /Flight-Luggage-Tracker-App/ && cp -r dist/Flight-Luggage-Tracker-App/browser/* dist/Flight-Luggage-Tracker-App/"
+    "deploy:gh": "ng build --configuration production --base-href /Flight-Luggage-Tracker-App/ && cp -r dist/Flight-Luggage-Tracker-App/browser/* dist/Flight-Luggage-Tracker-App/"
   },
   "prettier": {
     "overrides": [

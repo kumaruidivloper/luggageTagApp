@@ -27,14 +27,14 @@ ng generate --help
 ```
 
 ## Building
+Step1: npm run deploy:gh
+Step2: update in index.html <base href="./">
+Step3: npx angular-cli-ghpages --dir=dist/Flight-Luggage-Tracker-App
 
+## Command Already added in package.json
 ng build --configuration production --base-href /Flight-Luggage-Tracker-App/
-
 cp -r dist/Flight-Luggage-Tracker-App/browser/* dist/Flight-Luggage-Tracker-App/
-
 npx angular-cli-ghpages --dir=dist/Flight-Luggage-Tracker-App
-
-npm run deploy:gh
 
 ## Run Server
 ng serve --host 0.0.0.0 --port 4200
