@@ -1,4 +1,4 @@
-import { Component, ElementRef, inject , OnInit, ViewChild} from '@angular/core';
+import { Component, ElementRef, inject , OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {
   MatDialog,
   MAT_DIALOG_DATA,
@@ -27,9 +27,10 @@ import { LuggageService } from './services/luggage-service'
     ])
   ]
 })
-export class App implements OnInit {
+export class App implements OnInit, OnDestroy {
   protected title = 'Flight-Luggage-Tracker-App';
   @ViewChild('passcode') passcode!: ElementRef<HTMLInputElement>;
+  @ViewChild('lockdiv') lockdiv!: ElementRef<HTMLInputElement>;
   isEditEnabled: boolean = false;
   isEditing: boolean = false;
   passcodeVar: string = 'lavakusa';
@@ -38,6 +39,9 @@ export class App implements OnInit {
   isPasscodetrue: boolean = false;
   cabinWeight: number = 0;
   checkinWeight: number = 0;
+  count: number = 0;
+  isLock: boolean = false;
+  private shakeInterval: any;
 
   travelDetails: any;
 
@@ -63,6 +67,12 @@ export class App implements OnInit {
   }
 
   ngOnInit(): void {
+    if(sessionStorage.getItem('isLock')) {
+    this.isLock = true;
+    this.startShakeLoop();
+  } else {
+    this.isLock = false;
+  }
     this.luggageService.getById('1').subscribe({
     next: (data) => {
       this.travelDetails = data;   // ✅ assign actual data here
@@ -72,6 +82,28 @@ export class App implements OnInit {
     error: (err) => console.error('Error loading record:', err)
   });
   }
+
+  startShakeLoop() {
+  this.shakeInterval = setInterval(() => {
+    this.lockdiv?.nativeElement.classList.add('shake');
+    
+    // Remove shake after animation completes (500ms based on your CSS)
+    setTimeout(() => {
+      this.lockdiv?.nativeElement.classList.remove('shake');
+    }, 500);
+  }, 2000); // Shake every 2 seconds
+}
+
+stopShakeLoop() {
+  if (this.shakeInterval) {
+    clearInterval(this.shakeInterval);
+    this.shakeInterval = null;
+  }
+}
+
+ngOnDestroy(): void {
+  this.stopShakeLoop(); // Clean up on component destroy
+}
   
   getLuggageIcon(type: string): string {
   const icons: { [key: string]: string } = {
@@ -129,6 +161,19 @@ export class App implements OnInit {
      } else {
         this.isInvalidPasscode = 'Incorrect Passcode'
      }
+
+     if(value.length > 7) {
+        this.count++;
+        if(this.count > 10) {
+           this.isLock = true;
+           sessionStorage.setItem('isLock', 'true');
+           setInterval(() => {
+            this.lockdiv?.nativeElement.classList.add('shake');
+            this.lockdiv?.nativeElement.classList.remove('shake');
+           },2000)
+           
+        } 
+     } 
   }
 
   openForm(event: Event) {

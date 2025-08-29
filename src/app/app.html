@@ -1,18 +1,42 @@
 <div class="page-container">
-  <mat-card  class="details-card">
+ 
+<mat-card  class="details-card">
+@if(isLock) {
+   <div class="lockWrraper">
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+
+    <div class="lock-container">
+        <div class="lock" #lockdiv id="lockIcon" (mouseenter)="lockdiv.style.transform = 'scale(1.1)';" (mouseleave)="lockdiv.style.transform = 'scale(1)'">
+            <div class="lock-shackle"></div>
+            <div class="lock-body">
+                <div class="keyhole"></div>
+            </div>
+        </div>
+        <div class="status" id="statusText">Locked</div>
+    </div>
+
+    <div class="instructions">
+        Click the lock to toggle
+    </div>
+  </div>
+}
+
 <div class="editable-container">
-  @if(!isEditing) {
+  @if(!isEditing && !isLock) {
     <!-- Display Mode -->
     <div @fadeInOut>
        <div class="baggage-card cabin time editButton gradient-btn btn-pulse" (click)="toggleEdit()"><mat-icon>edit</mat-icon> Enter Passcode For Edit</div>
     </div>
   }
   
-  @if(isEditing) {
+  @if(!isLock) {
+    @if(isEditing) {
     <!-- Edit Mode -->
   <div @fadeInOut>
     <mat-form-field appearance="outline">
-      <mat-label>Enter Passcode</mat-label>
+      <mat-label>Passcode For Edit</mat-label>
       <input #passcode matInput type="password"    (keyup)="getPassCodeValue(passcode.value)"/>
       @if(passcode.value) {
         <button style="margin-right: 10px"
@@ -39,6 +63,8 @@
     }  
   </div>
   }
+  }
+  
 
   
 </div>
