@@ -1,4 +1,4 @@
-import { Component, ElementRef, inject , OnDestroy, OnInit, ViewChild} from '@angular/core';
+import { Component, ElementRef, inject , OnDestroy, OnInit, ViewChild, HostListener} from '@angular/core';
 import {
   MatDialog,
   MAT_DIALOG_DATA,
@@ -33,7 +33,6 @@ export class App implements OnInit, OnDestroy {
   @ViewChild('lockdiv') lockdiv!: ElementRef<HTMLInputElement>;
   isEditEnabled: boolean = false;
   isEditing: boolean = false;
-  passcodeVar: string = 'lavakusa';
   value: string = 'Enter Passcode to enable edit';
   isInvalidPasscode: string = '';
   isPasscodetrue: boolean = false;
@@ -101,6 +100,7 @@ stopShakeLoop() {
   }
 }
 
+
 ngOnDestroy(): void {
   this.stopShakeLoop(); // Clean up on component destroy
 }
@@ -124,13 +124,21 @@ ngOnDestroy(): void {
 //         }
 
 
+
   toggleEdit() {
     this.isEditing = !this.isEditing;
     if(this.passcode) {
       this.passcode.nativeElement.value = '';
     }
     this.isInvalidPasscode = '';
-      this.isPasscodetrue = false;
+    this.isPasscodetrue = false;
+
+    document.addEventListener('keydown', (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        this.isEditing = false;
+        this.isLock = false
+      }
+    });
   }
 
   getLuggageWeight(data: any) {
@@ -143,14 +151,14 @@ ngOnDestroy(): void {
           break;
           default:
           this.checkinWeight += item.weight;
-        }
-          
+        }    
      });
   }
 
   getPassCodeValue(value: string) {
-     if (this.passcodeVar === value) {
+     if (this.base64Decode(btoa(value)) === this.base64Decode('bGF2YWt1c2E=')) {
          this.isPasscodetrue = true;
+         this.count = 0;
          this.isInvalidPasscode = '';
         setTimeout(() => {
           this.cdr.detectChanges();
@@ -170,10 +178,13 @@ ngOnDestroy(): void {
            setInterval(() => {
             this.lockdiv?.nativeElement.classList.add('shake');
             this.lockdiv?.nativeElement.classList.remove('shake');
-           },2000)
-           
+           },2000)   
         } 
      } 
+  }
+
+  private base64Decode(value: string) {
+      return atob(value);
   }
 
   openForm(event: Event) {

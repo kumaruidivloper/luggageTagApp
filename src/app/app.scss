@@ -1406,20 +1406,20 @@ mat-card {
     animation: pulse 2s infinite;
 }
 
-@keyframes pulse {
-    0% {
-        opacity: 0;
-        transform: translate(-50%, -50%) scale(1);
-    }
-    50% {
-        opacity: 0.3;
-        transform: translate(-50%, -50%) scale(1.2);
-    }
-    100% {
-        opacity: 0;
-        transform: translate(-50%, -50%) scale(1.4);
-    }
-}
+// @keyframes pulse {
+//     0% {
+//         opacity: 0;
+//         transform: translate(-50%, -50%) scale(1);
+//     }
+//     50% {
+//         opacity: 0.3;
+//         transform: translate(-50%, -50%) scale(1.2);
+//     }
+//     100% {
+//         opacity: 0;
+//         transform: translate(-50%, -50%) scale(1.4);
+//     }
+// }
 
 /* Status text */
 .status {

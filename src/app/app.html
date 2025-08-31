@@ -37,7 +37,7 @@
   <div @fadeInOut>
     <mat-form-field appearance="outline">
       <mat-label>Passcode For Edit</mat-label>
-      <input #passcode matInput type="password"    (keyup)="getPassCodeValue(passcode.value)"/>
+      <input #passcode matInput type="password"  (keyup)="getPassCodeValue(passcode.value)"/>
       @if(passcode.value) {
         <button style="margin-right: 10px"
         mat-icon-button
