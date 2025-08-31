@@ -141,8 +141,15 @@
   <h3>Luggage Details</h3>
   
   <div *ngFor="let luggage of luggageArray.controls; let i = index" [formGroupName]="i" class="luggage-item">
-    <h4>Luggage Count {{i + 1}}</h4>
-    
+    <h4 style="position: relative;">Luggage Count {{i + 1}}
+      <!-- <button  matButton="elevated"   color="warn">
+        <mat-icon class="deleteButtonStyle">delete</mat-icon>
+      </button> -->
+      <button style="font-weight: bold; position: absolute;right: 0px; top: -8px;" (click)="removeLuggage(i, $event)" matFab class="custom-fab" aria-label="Example icon button with a delete icon">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </h4>
+    <!-- Remove Button -->
     <div class="luggage-fields">
       <!-- Luggage Number -->
       <mat-form-field appearance="outline">
@@ -195,11 +202,6 @@
             </mat-error> 
         }
       </mat-form-field>
-
-      <!-- Remove Button -->
-      <button style="font-weight: bold;" matButton="elevated"  (click)="removeLuggage(i, $event)" color="warn">
-        <mat-icon class="deleteButtonStyle">delete</mat-icon> Delete
-      </button>
     </div>
   </div>
 

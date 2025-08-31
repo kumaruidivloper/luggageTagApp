@@ -102,3 +102,16 @@ mat-card {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
+.mat-mdc-button-base.custom-fab {
+    width: 70px;
+    height: 35px;
+    mat-icon {
+      background: linear-gradient(-260deg, #e1371d, #e30b3a, #a13113, #dd0a26);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+}
+.mat-mdc-fab.custom-fab {
+  background-color: unset;
+} 
