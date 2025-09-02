@@ -41,10 +41,13 @@ export class App implements OnInit, OnDestroy {
   count: number = 0;
   isLock: boolean = false;
   private shakeInterval: any;
+  isLoading: boolean = true;
+  tokenValue: string = ''
 
   travelDetails: any;
 
-  constructor(private dialog: MatDialog, private cdr: ChangeDetectorRef, private luggageService: LuggageService) {}
+  constructor(private dialog: MatDialog, private cdr: ChangeDetectorRef, private luggageService: LuggageService) {
+  }
 
   openDialog() {
     const dialogRef = this.dialog.open(FormEdit, {
@@ -67,20 +70,25 @@ export class App implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     if(sessionStorage.getItem('isLock')) {
-    this.isLock = true;
-    this.startShakeLoop();
-  } else {
-    this.isLock = false;
-  }
+      this.isLock = true;
+      this.startShakeLoop();
+    } else {
+      this.isLock = false;
+    }
     this.luggageService.getById('1').subscribe({
-    next: (data) => {
+      next: (data) => {
       this.travelDetails = data;   // ✅ assign actual data here
+      this.tokenValue = this.travelDetails?.macMask;
+      this.isLoading = false;
       this.getLuggageWeight(data);
       this.cdr.detectChanges();
     },
-    error: (err) => console.error('Error loading record:', err)
-  });
-  }
+    error: (err) => {
+      console.error('Error loading record:', err);
+      this.isLoading = false;
+    }   
+    });
+ }
 
   startShakeLoop() {
   this.shakeInterval = setInterval(() => {
@@ -156,7 +164,7 @@ ngOnDestroy(): void {
   }
 
   getPassCodeValue(value: string) {
-     if (this.base64Decode(btoa(value)) === this.base64Decode('bGF2YWt1c2E=')) {
+     if (this.maskMac(btoa(value)) === this.maskMac(this.rearrangeChars('F2Wt2E', this.tokenValue))) {
          this.isPasscodetrue = true;
          this.count = 0;
          this.isInvalidPasscode = '';
@@ -183,9 +191,16 @@ ngOnDestroy(): void {
      } 
   }
 
-  private base64Decode(value: string) {
+  private maskMac(value: string) {
       return atob(value);
   }
+
+rearrangeChars(str1: string, str2: string) {
+    let allChars = (str1 + str2).split('');
+    let rearranged = [allChars[6],allChars[7],allChars[0],allChars[1],allChars[9],allChars[2],allChars[3],allChars[10],allChars[11],allChars[1],allChars[5],allChars[8]].join('');
+    return rearranged;
+}
+
 
   openForm(event: Event) {
     event.preventDefault();

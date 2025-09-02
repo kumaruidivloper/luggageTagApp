@@ -1,7 +1,14 @@
-<div class="page-container">
- 
-<mat-card  class="details-card">
-@if(isLock) {
+@if(isLoading) {
+  <mat-card  class="details-card" style="height: 92vh;">
+      <div class="loader-container">
+        <mat-spinner diameter="80" style="margin: 20px 0;"></mat-spinner> Loading ... 
+      </div>
+  </mat-card>
+} 
+@if(!isLoading) {
+  <div class="page-container">
+  <mat-card  class="details-card">
+  @if(isLock) {
    <div class="lockWrraper">
     <div class="particle"></div>
     <div class="particle"></div>
@@ -204,7 +211,8 @@
   <div class="info-item">
     <span class="label">Passenger Name:</span>
      @if(travelDetails) {
-        <span class="value">👨 {{travelDetails.firstName}} {{travelDetails.lastName}}</span>
+        <span>👨</span>
+        <div class="value">{{travelDetails.firstName}} {{travelDetails.lastName}}</div>
       } @else {
         <span class="value">Kumaravel Shanmugam</span>
       }
@@ -212,7 +220,8 @@
   <div class="info-item">
     <span class="label">Contact Number:</span>
      @if(travelDetails) {
-        <span class="value">📞 {{travelDetails.contactNumber}}</span>
+        <span>📞</span>
+        <div class="value">{{travelDetails.contactNumber}}</div>
       } @else {
         <span class="value">+91-9945729262</span>
       }
@@ -220,7 +229,8 @@
   <div class="info-item">
     <span class="label">Airline & <Code></Code>:</span>
      @if(travelDetails) {
-        <span class="value">✈️ {{travelDetails.flightService}}</span>
+        <span>✈️</span>
+        <div class="value">{{travelDetails.flightService}}</div>
       } @else {
         <span class="value">Qantaz</span>
       }
@@ -228,7 +238,8 @@
   <div class="info-item">
     <span class="label">Layover:</span>
     @if(travelDetails && travelDetails.hasLayover) {
-        <span class="value"> 🕒 {{travelDetails.layoverTime}}</span>
+        <span>🕒</span>
+        <div class="value">{{travelDetails.layoverTime}}</div>
       } @else {
         <span class="value">No Layover</span>
       }
@@ -309,5 +320,7 @@
         }
       </div>
     </div>
-</mat-card>
+  </mat-card>
 </div>
+}
+
