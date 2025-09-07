@@ -42,7 +42,8 @@ export class App implements OnInit, OnDestroy {
   isLock: boolean = false;
   private shakeInterval: any;
   isLoading: boolean = true;
-  tokenValue: string = ''
+  tokenValue: string = '';
+  baseImagePath: string = './assets/images/';
 
   travelDetails: any;
 

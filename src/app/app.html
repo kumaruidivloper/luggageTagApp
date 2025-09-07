@@ -227,9 +227,9 @@
       }
   </div>
   <div class="info-item">
-    <span class="label">Airline & <Code></Code>:</span>
+    <span class="label">Airline:</span>
      @if(travelDetails) {
-        <span>✈️</span>
+        <span><img [src]="`${baseImagePath}${travelDetails.flightService}.png`" style="height: 40px; width: 40px;"></span>
         <div class="value">{{travelDetails.flightService}}</div>
       } @else {
         <span class="value">Qantaz</span>
