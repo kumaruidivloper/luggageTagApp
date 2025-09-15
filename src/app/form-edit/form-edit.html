@@ -52,7 +52,16 @@
       <!-- Flight Service -->
       <mat-form-field appearance="outline">
         <mat-label>Flight Service</mat-label>
-        <input matInput formControlName="flightService" />
+        <mat-select formControlName="flightService">
+            @for (service of flightService; track service.label) {
+              <mat-option [value]="service.value">
+                <img [src]="service.logo"
+              alt="{{service.label}}"
+              style="height: 20px; width: 20px; margin-right: 8px; vertical-align: middle;">
+                {{ service.label }}
+              </mat-option>
+            }
+        </mat-select>
         @if(travelForm.get('flightService')?.hasError('required')) {
             <mat-error>
             Flight service is required

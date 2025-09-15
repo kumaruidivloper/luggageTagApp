@@ -44,6 +44,7 @@ export class App implements OnInit, OnDestroy {
   isLoading: boolean = true;
   tokenValue: string = '';
   baseImagePath: string = './assets/images/';
+  luggageDetails:boolean = false;
 
   travelDetails: any;
 
@@ -167,6 +168,7 @@ ngOnDestroy(): void {
   getPassCodeValue(value: string) {
      if (this.maskMac(btoa(value)) === this.maskMac(this.rearrangeChars('F2Wt2E', this.tokenValue))) {
          this.isPasscodetrue = true;
+         this.luggageDetails = true;
          this.count = 0;
          this.isInvalidPasscode = '';
         setTimeout(() => {

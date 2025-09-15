@@ -16,8 +16,33 @@ travelForm: FormGroup;
 recordId: string = '1';
 travelDetails: any;
 isSubmitting: boolean = false;
-
-  flightServices = ['Singapore Airlines', 'Qantas', 'Emirates', 'Etihad'];
+flightService = [
+  { value: 'Airasia', label: 'Airasia', logo: './assets/images/Airasia.png' },
+  { value: 'Airindia', label: 'AirIndia', logo: './assets/images/Airindia.png' },
+  { value: 'Air NewZealand', label: 'Air NewZealand', logo: './assets/images/Air NewZealand.png' },
+  { value: 'Cathay pacific', label: 'Cathay pacific', logo: './assets/images/Cathay pacific.png' },
+  { value: 'Emirates', label: 'Emirates', logo: './assets/images/Emirates.png' },
+  { value: 'Etihad', label: 'Etihad', logo: './assets/images/Etihad.png' },
+  { value: 'Jetstar', label: 'Jetstar', logo: './assets/images/Jetstar.png' },
+  { value: 'Lufthansa', label: 'Lufthansa', logo: './assets/images/Lufthansa.png' },
+  { value: 'Qantas', label: 'Qantas', logo: './assets/images/Qantas.png' },
+  { value: 'Qatar Airways', label: 'Qatar Airways', logo: './assets/images/Qatar Airways.png' },
+  { value: 'Scoot', label: 'Scoot', logo: './assets/images/Scoot.png' },
+  { value: 'Singapore Airlines', label: 'Singapore Airlines', logo: './assets/images/Singapore Airlines.png'},
+  { value: 'Air Canada', label: 'Air Canada', logo: './assets/images/Air Canada.png'},
+  { value: 'Air China', label: 'Air China', logo: './assets/images/Air China.png'},
+  { value: 'Air France', label: 'Air France', logo: './assets/images/Air France.png'},
+  { value: 'Air India Express', label: 'Air India Express', logo: './assets/images/Air India Express.png'},
+  { value: 'American Airlines', label: 'American Airlines', logo: './assets/images/American Airlines.png'},
+  { value: 'Gulf Air', label: 'Gulf Air', logo: './assets/images/Gulf Air.png'},
+  { value: 'Indigo', label: 'Indigo', logo: './assets/images/Indigo.png'},
+  { value: 'Malaysia Airlines', label: 'Malaysia Airlines', logo: './assets/images/Malaysia Airlines.png'},
+  { value: 'Oman Air', label: 'Oman Air', logo: './assets/images/Oman Air.png'},
+  { value: 'Swiss', label: 'Swiss', logo: './assets/images/Swiss.png'},
+  { value: 'Thai Airways', label: 'Thai Airways', logo: './assets/images/Thai Airways.png'},
+  { value: 'Virgin Australia', label: 'Virgin Australia', logo: './assets/images/Virgin Australia.png'},
+  { value: 'British Airways', label: 'British Airways', logo: './assets/images/British Airways.png'},
+]
 
   constructor(private fb: FormBuilder,
     private dialogRef: MatDialogRef<FormEdit>,
@@ -32,7 +57,7 @@ isSubmitting: boolean = false;
       from: ['', Validators.required],
       dot: ['', Validators.required],
       to: ['', Validators.required],
-      flightService: ['', Validators.required],
+      flightService: [[], Validators.required],
       hasLayover: [false],
       layoverFrom: [''],
       layoverTo: [''],
@@ -134,6 +159,7 @@ onSubmit() {
   }
 
   ngOnInit(): void {
+  this.flightService.sort((a, b) => a.label.localeCompare(b.label));
       this.luggageService.getById('1').subscribe({
       next: (data) => {
         this.travelDetails = data;   // ✅ assign actual data here
