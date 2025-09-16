@@ -42,6 +42,10 @@ flightService = [
   { value: 'Thai Airways', label: 'Thai Airways', logo: './assets/images/Thai Airways.png'},
   { value: 'Virgin Australia', label: 'Virgin Australia', logo: './assets/images/Virgin Australia.png'},
   { value: 'British Airways', label: 'British Airways', logo: './assets/images/British Airways.png'},
+  { value: 'Srilankan Airlines', label: 'Srilankan Airlines', logo: './assets/images/Srilankan Airlines.png'},
+  { value: 'KLM', label: 'KLM', logo: './assets/images/KLM.png'},
+  { value: 'Japan Airlines', label: 'Japan Airlines', logo: './assets/images/Japan Airlines.png'},
+  { value: 'HongKong Airlines', label: 'HongKong Airlines', logo: './assets/images/HongKong Airlines.png'},
 ]
 
   constructor(private fb: FormBuilder,
@@ -62,6 +66,7 @@ flightService = [
       layoverFrom: [''],
       layoverTo: [''],
       layoverTime: [''],
+      flightNumber: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       contactNumber: ['', [Validators.required, Validators.pattern('^[0-9]{10,15}$')]],
       luggage: this.fb.array([])
@@ -185,6 +190,7 @@ onSubmit() {
     contactNumber: data.contactNumber || '',
     dot: data.dot || '',
     email: data.email || '',
+    flightNumber: data.flightNumber || '',
   });
 
   // Handle FormArray separately

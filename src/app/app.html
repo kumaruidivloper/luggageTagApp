@@ -230,7 +230,7 @@
     <span class="label">Airline:</span>
      @if(travelDetails) {
         <span><img [src]="`${baseImagePath}${travelDetails.flightService}.png`" style="height: 40px; width: 40px;"></span>
-        <div class="value">{{travelDetails.flightService}}</div>
+        <div class="value">{{travelDetails.flightService}} <span class="flight-id-style">{{travelDetails.flightNumber}}</span></div>
       } @else {
         <span class="value">Qantaz</span>
       }

@@ -1485,6 +1485,19 @@ mat-card {
 }
 /* Lock icon style end */
 
+.flight-id-style {
+  background: linear-gradient(90deg, #667eea, #764ba2, #7e1989, #f5576c);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  border: solid 1px #00000021;
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 20px;
+  position: absolute;
+  top: 17px;
+  right: 26px;
+}
+
 
 
 

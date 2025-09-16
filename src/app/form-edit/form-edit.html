@@ -71,6 +71,17 @@
 
       <!-- From -->
       <mat-form-field appearance="outline">
+        <mat-label>Flight Number</mat-label>
+        <input matInput formControlName="flightNumber" />
+        @if(travelForm.get('flightNumber')?.hasError('required')) {
+            <mat-error>
+            Flight number is required
+            </mat-error>
+        }
+      </mat-form-field>
+
+      <!-- From -->
+      <mat-form-field appearance="outline">
         <mat-label>From</mat-label>
         <input matInput formControlName="from" />
         @if(travelForm.get('from')?.hasError('required')) {
