@@ -735,7 +735,8 @@ mat-card {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 16px;
+  gap: 12px;
+  white-space: nowrap;
   background: linear-gradient(90deg, #667eea, #764ba2, #f093fb, #f5576c);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -743,6 +744,17 @@ mat-card {
   i {
     color: #667eea;
     font-size: 1.8rem;
+  }
+
+  .flightIconColor {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2.2rem;
+    min-height: 2.2rem;
+    position: relative;
+    z-index: 1;
   }
 }
 
@@ -1130,12 +1142,16 @@ mat-card {
   padding: 5px;
   border-radius: 20px;
   transform: rotate(-45deg);
+  transform-origin: center;
+  flex-shrink: 0;
 }
 .flightIconColor.land.main.secondflight {
   background: linear-gradient(260deg, #667eea, #764ba2, #f093fb, #f5576c);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   transform: rotate(45deg);
+  transform-origin: center;
+  flex-shrink: 0;
 }
 .luggage-type-badge {
   .smallIcon {
