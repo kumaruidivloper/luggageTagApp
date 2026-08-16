@@ -206,6 +206,10 @@ rearrangeChars(str1: string, str2: string) {
 
 
   openForm(event: Event) {
+    if (!this.isPasscodetrue) {
+      return;
+    }
+
     event.preventDefault();
     this.openDialog();
     this.isPasscodetrue = false;

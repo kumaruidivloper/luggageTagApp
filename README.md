@@ -25,6 +25,8 @@ For a complete list of available schematics (such as `components`, `directives`,
 ```bash
 ng generate --help
 ```
+## Code push
+git push -u origin flight-image-update
 
 ## Building
 Step1: npm run deploy:gh
