@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { LuggageService } from './../services/luggage-service';
@@ -9,6 +9,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   selector: 'app-form-edit',
   standalone: false,
   templateUrl: './form-edit.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './form-edit.scss'
 })
 export class FormEdit implements OnInit {

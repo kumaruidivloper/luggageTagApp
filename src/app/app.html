@@ -208,7 +208,7 @@
       Passenger Details
     </h2>
     <p class="passengerDetails">Passenger information at a glance</p>
-    <div class="baggage-card cabin time"> 🕒 Date Of Travel <span class="travelDate"> {{travelDetails?.dot | date}}</span></div>
+    <div class="baggage-card cabin time"> 🕒 Date Of Travel <span class="travelDate"> {{$safeNavigationMigration(travelDetails?.dot) | date}}</span></div>
     <div class="baggage-card cabin email"> ✉️ {{travelDetails?.email}}</div>
   </div>
 

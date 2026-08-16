@@ -1,263 +1,263 @@
 <h2 mat-dialog-title>🧳 <span class="formTiltleStyle">Travel Bags Details Form</span></h2>
 <mat-dialog-content class="mat-typography">
-<div style="padding: 15px 15px 15px 15px; background-color: #f1f3f5;">
+  <div style="padding: 15px 15px 15px 15px; background-color: #f1f3f5;">
     <form [formGroup]="travelForm" (ngSubmit)="onSubmit()">
-    <div class="form-grid">
-      <!-- First Name -->
-      <mat-form-field appearance="outline">
-        <mat-label>First Name</mat-label>
-        <input matInput formControlName="firstName" />
-        @if(travelForm.get('firstName')?.hasError('required')) {
+      <div class="form-grid">
+        <!-- First Name -->
+        <mat-form-field appearance="outline">
+          <mat-label>First Name</mat-label>
+          <input matInput formControlName="firstName" />
+          @if(travelForm.get('firstName')?.hasError('required')) {
             <mat-error>
-            First name is required
+              First name is required
             </mat-error>
-        }
-        
-      </mat-form-field>
+          }
 
-      <!-- Last Name -->
-      <mat-form-field appearance="outline">
-        <mat-label>Last Name</mat-label>
-        <input matInput formControlName="lastName" />
-        @if(travelForm.get('lastName')?.hasError('required')) {
+        </mat-form-field>
+
+        <!-- Last Name -->
+        <mat-form-field appearance="outline">
+          <mat-label>Last Name</mat-label>
+          <input matInput formControlName="lastName" />
+          @if(travelForm.get('lastName')?.hasError('required')) {
             <mat-error>
-            Last name is required
+              Last name is required
             </mat-error>
-        }
-      </mat-form-field>
-
-       <mat-form-field appearance="outline">
-            <mat-label>DOT</mat-label>
-            <input matInput [matDatepicker]="dob" formControlName="dot" placeholder="MM/DD/YYYY">
-            <mat-hint></mat-hint>
-            <mat-datepicker-toggle matIconSuffix [for]="dob"></mat-datepicker-toggle>
-            <mat-datepicker #dob></mat-datepicker>
-            @if(travelForm.get('dot')?.hasError('required')) {
-              <mat-error>
-                Dot is required
-              </mat-error>
-            }
+          }
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-            <mat-label>Email</mat-label>
-            <input matInput type="email" placeholder="Ex. test@gmail.com" formControlName="email">
-            @if(travelForm.get('email')?.hasError('required')) {
-              <mat-error>
-                Email is required
-              </mat-error>
-            }
+          <mat-label>DOT</mat-label>
+          <input matInput [matDatepicker]="dob" formControlName="dot" placeholder="MM/DD/YYYY">
+          <mat-hint></mat-hint>
+          <mat-datepicker-toggle matIconSuffix [for]="dob"></mat-datepicker-toggle>
+          <mat-datepicker #dob></mat-datepicker>
+          @if(travelForm.get('dot')?.hasError('required')) {
+            <mat-error>
+              Dot is required
+            </mat-error>
+          }
         </mat-form-field>
 
-      <!-- Flight Service -->
-      <mat-form-field appearance="outline">
-        <mat-label>Flight Service</mat-label>
-        <mat-select formControlName="flightService">
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput type="email" placeholder="Ex. test@gmail.com" formControlName="email">
+          @if(travelForm.get('email')?.hasError('required')) {
+            <mat-error>
+              Email is required
+            </mat-error>
+          }
+        </mat-form-field>
+
+        <!-- Flight Service -->
+        <mat-form-field appearance="outline">
+          <mat-label>Flight Service</mat-label>
+          <mat-select formControlName="flightService">
             @for (service of flightService; track service.label) {
               <mat-option [value]="service.value">
                 <img [src]="service.logo"
-              alt="{{service.label}}"
-              style="height: 20px; width: 20px; margin-right: 8px; vertical-align: middle;">
+                  alt="{{service.label}}"
+                  style="height: 20px; width: 20px; margin-right: 8px; vertical-align: middle;">
                 {{ service.label }}
               </mat-option>
             }
-        </mat-select>
-        @if(travelForm.get('flightService')?.hasError('required')) {
+          </mat-select>
+          @if(travelForm.get('flightService')?.hasError('required')) {
             <mat-error>
-            Flight service is required
+              Flight service is required
             </mat-error>
-        }
-      </mat-form-field>
+          }
+        </mat-form-field>
 
-      <!-- From -->
-      <mat-form-field appearance="outline">
-        <mat-label>Flight Number</mat-label>
-        <input matInput formControlName="flightNumber" />
-        @if(travelForm.get('flightNumber')?.hasError('required')) {
-            <mat-error>
-            Flight number is required
-            </mat-error>
-        }
-      </mat-form-field>
-
-      <!-- From -->
-      <mat-form-field appearance="outline">
-        <mat-label>From</mat-label>
-        <input matInput formControlName="from" />
-        @if(travelForm.get('from')?.hasError('required')) {
-            <mat-error>
-            Origin is required
-            </mat-error>
-        }
-      </mat-form-field>
-
-      <!-- To -->
-      <mat-form-field appearance="outline">
-        <mat-label>To Destination</mat-label>
-        <input matInput formControlName="to" />
-        @if(travelForm.get('to')?.hasError('required')) {
-            <mat-error>
-            Destination is required
-            </mat-error>
-        }
-      </mat-form-field>
-
-      <!-- Contact Number -->
-      <mat-form-field appearance="outline">
-        <mat-label>Contact Number</mat-label>
-        <input matInput formControlName="contactNumber" maxlength="10" />
-        @if(travelForm.get('contactNumber')?.hasError('required')) {
-            <mat-error>
-                Contact number is required
-            </mat-error>
-        }
-        @if(travelForm.get('contactNumber')?.hasError('pattern')) {
-            <mat-error>
-                Enter a valid 10-digit number
-            </mat-error>
-        }
-      </mat-form-field>
-    </div>
-
-    <!-- Layover Checkbox -->
-    <mat-checkbox formControlName="hasLayover">Any Layover?</mat-checkbox>
-
-    <!-- Layover Section -->
-    @if(travelForm.get('hasLayover')?.value) {
-        <div class="form-grid" style="margin-top: 18px;">
+        <!-- From -->
         <mat-form-field appearance="outline">
+          <mat-label>Flight Number</mat-label>
+          <input matInput formControlName="flightNumber" />
+          @if(travelForm.get('flightNumber')?.hasError('required')) {
+            <mat-error>
+              Flight number is required
+            </mat-error>
+          }
+        </mat-form-field>
+
+        <!-- From -->
+        <mat-form-field appearance="outline">
+          <mat-label>From</mat-label>
+          <input matInput formControlName="from" />
+          @if(travelForm.get('from')?.hasError('required')) {
+            <mat-error>
+              Origin is required
+            </mat-error>
+          }
+        </mat-form-field>
+
+        <!-- To -->
+        <mat-form-field appearance="outline">
+          <mat-label>To Destination</mat-label>
+          <input matInput formControlName="to" />
+          @if(travelForm.get('to')?.hasError('required')) {
+            <mat-error>
+              Destination is required
+            </mat-error>
+          }
+        </mat-form-field>
+
+        <!-- Contact Number -->
+        <mat-form-field appearance="outline">
+          <mat-label>Contact Number</mat-label>
+          <input matInput formControlName="contactNumber" maxlength="10" />
+          @if(travelForm.get('contactNumber')?.hasError('required')) {
+            <mat-error>
+              Contact number is required
+            </mat-error>
+          }
+          @if(travelForm.get('contactNumber')?.hasError('pattern')) {
+            <mat-error>
+              Enter a valid 10-digit number
+            </mat-error>
+          }
+        </mat-form-field>
+      </div>
+
+      <!-- Layover Checkbox -->
+      <mat-checkbox formControlName="hasLayover">Any Layover?</mat-checkbox>
+
+      <!-- Layover Section -->
+      @if(travelForm.get('hasLayover')?.value) {
+        <div class="form-grid" style="margin-top: 18px;">
+          <mat-form-field appearance="outline">
             <mat-label>Layover From</mat-label>
             <input matInput formControlName="layoverFrom" />
             @if(travelForm.get('layoverFrom')?.hasError('required')) {
-                <mat-error>
-                    Layover origin is required
-                </mat-error>
+              <mat-error>
+                Layover origin is required
+              </mat-error>
             }
-        </mat-form-field>
+          </mat-form-field>
 
-        <mat-form-field appearance="outline">
+          <mat-form-field appearance="outline">
             <mat-label>Layover To</mat-label>
             <input matInput formControlName="layoverTo" />
             @if(travelForm.get('layoverTo')?.hasError('required')) {
-                <mat-error>
-                    Layover destination is required
-                </mat-error>
+              <mat-error>
+                Layover destination is required
+              </mat-error>
             }
-        </mat-form-field>
+          </mat-form-field>
 
-        <mat-form-field appearance="outline">
+          <mat-form-field appearance="outline">
             <mat-label>Layover Time (hrs)</mat-label>
             <input matInput type="text" formControlName="layoverTime" />
             @if(travelForm.get('layoverTime')?.hasError('required')) {
-                <mat-error>
-                    Layover time is required
-                </mat-error>
+              <mat-error>
+                Layover time is required
+              </mat-error>
             }
-        </mat-form-field>
+          </mat-form-field>
         </div>
+      }
+
+      <div formArrayName="luggage">
+        <h3>Luggage Details</h3>
+
+        @for (luggage of luggageArray.controls; track luggage; let i = $index) {
+          <div [formGroupName]="i" class="luggage-item">
+            <h4 style="position: relative">Luggage Count <span style="padding: 7px 20px; border: solid 1px #0000001f; border-radius: 30px; margin-left: 10px; font-style: italic; background-color: #f5576c12;">{{i + 1}}</span>
+            <!-- <button  matButton="elevated"   color="warn">
+            <mat-icon class="deleteButtonStyle">delete</mat-icon>
+          </button> -->
+          <button style="font-weight: bold; position: absolute;right: 0px; top: -8px;" (click)="removeLuggage(i, $event)" matFab class="custom-fab" aria-label="Example icon button with a delete icon">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </h4>
+        <!-- Remove Button -->
+        <div class="luggage-fields">
+          <!-- Luggage Number -->
+          <mat-form-field appearance="outline">
+            <mat-label>Luggage Number</mat-label>
+            <input matInput formControlName="luggageNumber" placeholder="Enter luggage number">
+            @if(luggage.get('luggageNumber')?.hasError('required')) {
+              <mat-error>
+                Luggage number is required
+              </mat-error>
+            }
+          </mat-form-field>
+          <!-- Weight -->
+          <mat-form-field appearance="outline">
+            <mat-label>Weight (kg)</mat-label>
+            <input matInput type="number" formControlName="weight" placeholder="Enter weight">
+            @if(luggage.get('weight')?.hasError('required')) {
+              <mat-error>
+                Weight is required
+              </mat-error>
+            }
+            @if(luggage.get('weight')?.hasError('min')) {
+              <mat-error>Weight must be at least 1 kg</mat-error>
+            }
+          </mat-form-field>
+          <!-- Type -->
+          <mat-form-field appearance="outline">
+            <mat-label>Luggage Type</mat-label>
+            <mat-select formControlName="type">
+              <mat-option value="carry-on">Carry-on</mat-option>
+              <mat-option value="checked">Checked Baggage</mat-option>
+              <mat-option value="personal">Personal Item</mat-option>
+              <mat-option value="oversized">Oversized</mat-option>
+            </mat-select>
+            @if(luggage.get('type')?.hasError('required')) {
+              <mat-error>
+                Luggage type is required
+              </mat-error>
+            }
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Luggage Info</mat-label>
+            <input matInput type="text" formControlName="info" placeholder="Enter Luggage Info">
+            @if(luggage.get('type')?.hasError('required')) {
+              <mat-error>
+                Luggage type is required
+              </mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
     }
 
-   <div formArrayName="luggage">
-  <h3>Luggage Details</h3>
-  
-  <div *ngFor="let luggage of luggageArray.controls; let i = index" [formGroupName]="i" class="luggage-item">
-    <h4 style="position: relative">Luggage Count <span style="padding: 7px 20px; border: solid 1px #0000001f; border-radius: 30px; margin-left: 10px; font-style: italic; background-color: #f5576c12;">{{i + 1}}</span>
-      <!-- <button  matButton="elevated"   color="warn">
-        <mat-icon class="deleteButtonStyle">delete</mat-icon>
-      </button> -->
-      <button style="font-weight: bold; position: absolute;right: 0px; top: -8px;" (click)="removeLuggage(i, $event)" matFab class="custom-fab" aria-label="Example icon button with a delete icon">
-        <mat-icon>delete</mat-icon>
+    <!-- Add More Button -->
+    <div class="add-luggage-section">
+      <button type="button" mat-raised-button matButton="filled"  color="primary" (click)="addLuggage($event)">
+        <mat-icon>add</mat-icon>
+        Add More Luggage
       </button>
-    </h4>
-    <!-- Remove Button -->
-    <div class="luggage-fields">
-      <!-- Luggage Number -->
-      <mat-form-field appearance="outline">
-        <mat-label>Luggage Number</mat-label>
-        <input matInput formControlName="luggageNumber" placeholder="Enter luggage number">
-        @if(luggage.get('luggageNumber')?.hasError('required')) {
-            <mat-error>
-                Luggage number is required
-            </mat-error>
-        }
-        
-      </mat-form-field>
-
-      <!-- Weight -->
-      <mat-form-field appearance="outline">
-        <mat-label>Weight (kg)</mat-label>
-        <input matInput type="number" formControlName="weight" placeholder="Enter weight">
-        @if(luggage.get('weight')?.hasError('required')) {
-            <mat-error>
-                Weight is required
-            </mat-error>
-        }
-        @if(luggage.get('weight')?.hasError('min')) {
-            <mat-error>Weight must be at least 1 kg</mat-error>
-        }
-      </mat-form-field>
-
-      <!-- Type -->
-      <mat-form-field appearance="outline">
-        <mat-label>Luggage Type</mat-label>
-        <mat-select formControlName="type">
-          <mat-option value="carry-on">Carry-on</mat-option>
-          <mat-option value="checked">Checked Baggage</mat-option>
-          <mat-option value="personal">Personal Item</mat-option>
-          <mat-option value="oversized">Oversized</mat-option>
-        </mat-select>
-        @if(luggage.get('type')?.hasError('required')) {
-            <mat-error>
-            Luggage type is required
-            </mat-error> 
-        }
-      </mat-form-field>
-
-      <mat-form-field appearance="outline">
-        <mat-label>Luggage Info</mat-label>
-        <input matInput type="text" formControlName="info" placeholder="Enter Luggage Info">
-        @if(luggage.get('type')?.hasError('required')) {
-            <mat-error>
-            Luggage type is required
-            </mat-error> 
-        }
-      </mat-form-field>
     </div>
   </div>
 
-  <!-- Add More Button -->
-  <div class="add-luggage-section">
-    <button type="button" mat-raised-button matButton="filled"  color="primary" (click)="addLuggage($event)">
-      <mat-icon>add</mat-icon>
-      Add More Luggage
-    </button>
-  </div>
+</form>
 </div>
-    
-  </form>
-</div>
-  
+
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <!-- <button matButton="tonal">Reset</button> -->
   <button matButton="tonal" mat-dialog-close>Cancel</button>
-  <button 
-  matButton="elevated"
-  type="submit"
-  [disabled]="isSubmitting || travelForm.invalid"
-  (click)="onSubmit()">
-  
-  @if(isSubmitting) {
-    <mat-spinner 
-    diameter="20" 
-    color="accent"
-    style="display: inline-block; margin-right: 8px;">
-  </mat-spinner>
-  }
-  
-  
-  <mat-icon *ngIf="!isSubmitting" style="margin-right: 8px;">send</mat-icon>
-  
-  {{ isSubmitting ? 'Updating...' : 'Submit Travel Details' }}
-</button>
+  <button
+    matButton="elevated"
+    type="submit"
+    [disabled]="isSubmitting || travelForm.invalid"
+    (click)="onSubmit()">
+
+    @if(isSubmitting) {
+      <mat-spinner
+        diameter="20"
+        color="accent"
+        style="display: inline-block; margin-right: 8px;">
+      </mat-spinner>
+    }
+
+
+    @if (!isSubmitting) {
+      <mat-icon style="margin-right: 8px;">send</mat-icon>
+    }
+
+    {{ isSubmitting ? 'Updating...' : 'Submit Travel Details' }}
+  </button>
 </mat-dialog-actions>

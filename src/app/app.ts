@@ -1,4 +1,4 @@
-import { Component, ElementRef, inject , OnDestroy, OnInit, ViewChild, HostListener} from '@angular/core';
+import { Component, ElementRef, inject, OnDestroy, OnInit, ViewChild, HostListener, ChangeDetectionStrategy } from '@angular/core';
 import {
   MatDialog,
   MAT_DIALOG_DATA,
@@ -15,6 +15,7 @@ import { LuggageService } from './services/luggage-service'
   templateUrl: './app.html',
   standalone: false,
   styleUrl: './app.scss',
+  changeDetection: ChangeDetectionStrategy.Eager,
   animations: [
     trigger('fadeInOut', [
       transition(':enter', [

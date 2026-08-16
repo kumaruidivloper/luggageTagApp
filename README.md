@@ -25,6 +25,9 @@ For a complete list of available schematics (such as `components`, `directives`,
 ```bash
 ng generate --help
 ```
+## Stable branch 
+flight-image-update
+
 ## Code push
 git push -u origin flight-image-update
 
