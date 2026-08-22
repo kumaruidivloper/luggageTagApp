@@ -138,7 +138,17 @@
   
   @if(travelDetails != null && travelDetails.hasLayover) {
   <!-- Fancy Section Divider -->
-  <div class="section-divider"><mat-icon class="flightIconColor">flight_takeoff</mat-icon></div>
+  <div class="section-divider" aria-label="Flight connection">
+    <mat-icon class="divider-marker divider-start" aria-hidden="true">flight_takeoff</mat-icon>
+    <span class="divider-arc" aria-hidden="true"></span>
+    <span class="divider-dot-track" aria-hidden="true">
+      <span class="divider-dot"></span>
+      <span class="divider-dot"></span>
+      <span class="divider-dot"></span>
+    </span>
+    <mat-icon class="divider-plane" aria-hidden="true">flight</mat-icon>
+    <mat-icon class="divider-marker divider-end" aria-hidden="true">flight_land</mat-icon>
+  </div>
 
   <!-- Layover Route Section -->
   <div class="route-section">

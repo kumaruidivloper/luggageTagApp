@@ -648,33 +648,111 @@ mat-card {
 
 
 .section-divider {
-  width: 50%;
-  max-width: 200px;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, #667eea, #764ba2, #f093fb, transparent);
-  border-radius: 2px;
-  margin: 25px 25px;
+  width: min(70%, 520px);
+  height: 48px;
+  margin: 25px auto;
   position: relative;
-  animation: shimmer 3s ease-in-out infinite;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 
-  &::before {
-    content: '';
-    position: absolute;
-    top: -1px;
-    left: 0;
-    right: 0;
-    bottom: -1px;
-    background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.3), rgba(118, 75, 162, 0.3), rgba(240, 147, 251, 0.3), transparent);
-    filter: blur(2px);
+  .divider-marker {
+    z-index: 1;
+    width: 32px;
+    height: 32px;
+    font-size: 32px;
+    background: linear-gradient(135deg, #667eea, #f5576c);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 
-  .flightIconColor {
-    font-size: 50px;
-    height: 38px;
-    width: 50px;
+  .divider-arc {
     position: absolute;
-    top: -35px;
-    left: 85px;
+    left: 30px;
+    right: 30px;
+    top: 19px;
+    height: 26px;
+    border-top: 2px solid #d1d5db;
+    border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  }
+
+  .divider-dot-track {
+    position: absolute;
+    left: 30px;
+    right: 30px;
+    top: 19px;
+    height: 26px;
+  }
+
+  .divider-dot {
+    position: absolute;
+    top: 23px;
+    left: 0;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #e5e7eb;
+    box-shadow: 0 0 7px rgba(209, 213, 219, 0.95);
+    animation: dividerDotMove 3.2s linear infinite;
+
+    &:nth-child(2) { animation-delay: 1.05s; }
+    &:nth-child(3) { animation-delay: 2.1s; }
+  }
+
+  .divider-plane {
+    position: absolute;
+    z-index: 2;
+    top: 50%;
+    left: 50%;
+    width: 44px;
+    height: 44px;
+    font-size: 20px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    -webkit-text-fill-color: currentColor;
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+    transform: translate(-50%, -50%) rotate(90deg);
+    animation: dividerFloat 2.4s ease-in-out infinite;
+  }
+
+  .divider-start {
+    transform: rotate(-45deg);
+    animation: dividerMarkerIn 1s ease-out both;
+  }
+
+  .divider-end {
+    transform: rotate(45deg);
+    animation: dividerMarkerIn 1s ease-out 0.35s both;
+  }
+}
+
+@keyframes dividerMarkerIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes dividerFloat {
+  0%, 100% { transform: translate(-50%, -50%) rotate(90deg); }
+  50% { transform: translate(-50%, calc(-50% - 5px)) rotate(90deg); }
+}
+
+@keyframes dividerDotMove {
+  0% { left: 0; opacity: 0; transform: translateY(3px); }
+  12% { opacity: 1; }
+  50% { transform: translateY(-8px); }
+  88% { opacity: 1; }
+  100% { left: calc(100% - 5px); opacity: 0; transform: translateY(3px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section-divider .divider-marker,
+  .section-divider .divider-plane,
+  .section-divider .divider-dot {
+    animation: none;
   }
 }
 
@@ -1034,35 +1112,8 @@ mat-card {
   }
 
   .section-divider {
-  width: 50%;
-  max-width: 200px;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, #667eea, #764ba2, #f093fb, transparent);
-  border-radius: 2px;
-  margin: 25px 25px;
-  position: relative;
-  animation: shimmer 3s ease-in-out infinite;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: -1px;
-    left: 0;
-    right: 0;
-    bottom: -1px;
-    background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.3), rgba(118, 75, 162, 0.3), rgba(240, 147, 251, 0.3), transparent);
-    filter: blur(2px);
+    width: min(85%, 520px);
   }
-
-  .flightIconColor {
-    font-size: 50px;
-    height: 38px;
-    width: 50px;
-    position: absolute;
-    top: -35px;
-    left: 60px;
-  }
-}
   
 }
 
